@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Meta>
+  <title>Instant Fishing</title>
+  <id>omegaplatinum.elin.instantfishing</id>
+  <author>OmegaPlatinum</author>
+  <loadPriority>100</loadPriority>
+  <description>
+Instantly catch fish.
+
+- Removes delays in fishing progress.
+- Configurable hit value for fish progress via the config file. 
+    
+[h1] Configuration File [/h1] 
+[code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
+
+瞬時に魚を釣り上げます。
+
+- 釣りの進行の遅延を取り除きます。
+- 設定ファイルを通じて釣りの進行ヒット値をカスタマイズ可能です。 
+  </description>
+  <version>0.23.41</version>
+</Meta>
