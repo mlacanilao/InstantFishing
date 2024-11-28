@@ -7,7 +7,7 @@ namespace InstantFishing
     {
         internal const string Guid = "omegaplatinum.elin.instantfishing";
         internal const string Name = "Instant Fishing";
-        internal const string Version = "1.0.0.0";
+        internal const string Version = "1.1.0.0";
     }
 
     [BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
@@ -45,7 +45,7 @@ namespace InstantFishing
         [HarmonyPostfix]
         public static void Postfix(AIAct __instance)
         {
-            if (__instance is AI_Fish aiFishInstance && InstantFishingConfig.EnableTurboMode?.Value == true)
+            if (__instance is AI_Fish && InstantFishingConfig.EnableTurboMode?.Value == true)
             {
                 ActionMode.Adv.SetTurbo(mtp: InstantFishingConfig.TurboSpeed?.Value ?? 1);
             }
