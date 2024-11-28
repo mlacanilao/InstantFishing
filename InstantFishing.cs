@@ -10,7 +10,7 @@ namespace InstantFishing
         internal const string Version = "1.1.0.0";
     }
 
-    [BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
+    [BepInPlugin(ModInfo.Guid, ModInfo.Name, ModInfo.Version)]
     internal partial class InstantFishing : BaseUnityPlugin
     {
         internal static InstantFishing Instance { get; private set; }
@@ -18,14 +18,13 @@ namespace InstantFishing
         private void Awake()
         {
             Instance = this;
-            InstantFishingConfig.LoadConfig(config: Config);
-            var harmony = new Harmony(id: ModInfo.Guid);
+            InstantFishingConfig.LoadConfig(Config);
+            var harmony = new Harmony(ModInfo.Guid);
             harmony.PatchAll();
         }
     }
 
-    [HarmonyPatch(declaringType: typeof(AI_Fish.ProgressFish))]
-    [HarmonyPatch(methodName: "OnProgress")]
+    [HarmonyPatch(typeof(AI_Fish.ProgressFish), nameof(AI_Fish.ProgressFish.OnProgress))]
     internal static class InstantFishingPatch
     {
         [HarmonyPrefix]
@@ -37,9 +36,8 @@ namespace InstantFishing
             }
         }
     }
-    
-    [HarmonyPatch(typeof(AIAct))]
-    [HarmonyPatch(nameof(AIAct.Start))]
+
+    [HarmonyPatch(typeof(AIAct), nameof(AIAct.Start))]
     internal static class InstantFishingTurboPatch
     {
         [HarmonyPostfix]
@@ -47,7 +45,7 @@ namespace InstantFishing
         {
             if (__instance is AI_Fish && InstantFishingConfig.EnableTurboMode?.Value == true)
             {
-                ActionMode.Adv.SetTurbo(mtp: InstantFishingConfig.TurboSpeed?.Value ?? 1);
+                ActionMode.Adv.SetTurbo(InstantFishingConfig.TurboSpeed?.Value ?? 1);
             }
         }
     }
