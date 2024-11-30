@@ -5,57 +5,89 @@
   <author>OmegaPlatinum</author>
   <loadPriority>100</loadPriority>
   <description>
-Instantly catch fish.
+    Supports Game Version: 0.23.43
 
-- Removes delays in fishing progress.
-- Configurable variables to customize your fishing experience.
+    Instantly catch fish with customizable settings.
 
-[h1] Configuration Variables [/h1]
+    - Removes delays in fishing progress.
+    - Allows you to enable or disable the mod entirely.
+    - Includes options for Turbo Mode to speed up fishing actions.
+    - Stamina-based fishing behavior ensures a balanced experience.
 
-[h2] Enable Instant Fishing [/h2]
-Enable or disable the Instant Fishing mod.
-[code]Default: true[/code]
+    [h1] Configuration Variables [/h1]
 
-[h2] Hit Value [/h2]
-Set the hit value for fish progress.
-[code]Default: 100 (Instant completion)[/code]
+    [h2] Enable Instant Fishing [/h2]
+    Enable or disable the Instant Fishing mod.
+    [code] Default: true [/code]
 
-[h2] Enable Turbo Mode [/h2]
-Enable or disable Turbo Mode to speed up fishing actions.
-[code]Default: true[/code]
+    [h2] Hit Value [/h2]
+    Set the hit value for fish progress.
+    [code] Default: 100 (Instant completion) [/code]
 
-[h2] Turbo Speed [/h2]
-Set the speed multiplier for Turbo Mode.
-[code]Default: 3 (3x speed multiplier)[/code]
+    [h2] Enable Turbo Mode [/h2]
+    Enable or disable Turbo Mode to speed up fishing actions.
+    [code] Default: true [/code]
 
-[h1] Configuration File Location [/h1]
-[code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
+    [h2] Turbo Speed [/h2]
+    Set the speed multiplier for Turbo Mode.
+    [code] Default: 3 (3x speed multiplier) [/code]
 
-瞬時に魚を釣り上げます。
+    [h2] Enable Stamina Check [/h2]
+    Enable or disable the stamina check during fishing.
+    [code] Default: true [/code]
 
-- 釣りの進行の遅延を取り除きます。
-- カスタマイズ可能な設定変数で釣り体験を調整できます。
+    [h2] Should Cancel [/h2]
+    Control whether the fishing action should cancel on specific conditions (e.g., low stamina).
+    [code] Default: true [/code]
 
-[h1] 設定変数 [/h1]
+    [h2] Stamina Threshold [/h2]
+    Set the minimum stamina required to continue fishing.
+    If the owner's stamina drops below this value, the fishing action will cancel.
+    [code] Default: 1 [/code]
 
-[h2] インスタントフィッシングの有効化 [/h2]
-インスタントフィッシングMODを有効または無効にします。
-[code]デフォルト: true[/code]
+    [h1] Configuration File Location [/h1]
+    [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-[h2] ヒット値 [/h2]
-魚の進行度に設定する値です。
-[code]デフォルト: 100（瞬時に完了）[/code]
+    瞬時に魚を釣り上げます。カスタマイズ可能な設定で釣り体験を調整できます。
 
-[h2] ターボモードの有効化 [/h2]
-釣りのターボモードを有効または無効にします。
-[code]デフォルト: true[/code]
+    - 釣りの進行の遅延を取り除きます。
+    - MOD全体を有効または無効にするオプションが含まれています。
+    - ターボモードを使用して釣りのアクションを高速化します。
+    - スタミナベースの釣り行動でバランスの取れた体験を保証します。
 
-[h2] ターボスピード [/h2]
-ターボモードのスピード倍率を設定します。
-[code]デフォルト: 3（3倍速）[/code]
+    [h1] 設定変数 [/h1]
 
-[h1] 設定ファイルの場所 [/h1]
-[code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code] 
+    [h2] インスタントフィッシングの有効化 [/h2]
+    インスタントフィッシングMODを有効または無効にします。
+    [code] デフォルト: true [/code]
+
+    [h2] ヒット値 [/h2]
+    魚の進行度に設定する値です。
+    [code] デフォルト: 100（瞬時に完了） [/code]
+
+    [h2] ターボモードの有効化 [/h2]
+    釣りのターボモードを有効または無効にします。
+    [code] デフォルト: true [/code]
+
+    [h2] ターボスピード [/h2]
+    ターボモードのスピード倍率を設定します。
+    [code] デフォルト: 3（3倍速） [/code]
+
+    [h2] スタミナチェックの有効化 [/h2]
+    釣り中のスタミナチェックを有効または無効にします。
+    [code] デフォルト: true [/code]
+
+    [h2] キャンセルの有効化 [/h2]
+    特定の条件（例: スタミナ不足）で釣りアクションをキャンセルするかどうかを設定します。
+    [code] デフォルト: true [/code]
+
+    [h2] スタミナしきい値 [/h2]
+    釣りを続けるために必要な最小スタミナを設定します。
+    所有者のスタミナがこの値を下回ると、釣りアクションがキャンセルされます。
+    [code] デフォルト: 1 [/code]
+
+    [h1] 設定ファイルの場所 [/h1]
+    [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
   </description>
-  <version>0.23.42</version>
+  <version>0.23.43</version>
 </Meta>
