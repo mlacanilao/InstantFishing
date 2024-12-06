@@ -5,89 +5,54 @@
   <author>OmegaPlatinum</author>
   <loadPriority>100</loadPriority>
   <description>
-    Supports Game Version: 0.23.43
+    Supports Game Version: 0.23.46
 
-    Instantly catch fish with customizable settings.
+    Instantly catch fish with customizable settings through an in-game configuration menu.
+    [list]
+    [*][b]NEW[/b]: Introduced a configuration menu for managing all mod settings.
+    [*][b]NEW[/b]: Added item multipliers to increase the number of caught items.
+    [*][b]NEW[/b]: Added an option to set custom blessed states for caught items.
+    [*]No game restart required. Changes take effect immediately.
+    [/list]
 
-    - Removes delays in fishing progress.
-    - Allows you to enable or disable the mod entirely.
-    - Includes options for Turbo Mode to speed up fishing actions.
-    - Stamina-based fishing behavior ensures a balanced experience.
-
-    [h1] Configuration Variables [/h1]
-
-    [h2] Enable Instant Fishing [/h2]
-    Enable or disable the Instant Fishing mod.
-    [code] Default: true [/code]
-
-    [h2] Hit Value [/h2]
-    Set the hit value for fish progress.
-    [code] Default: 100 (Instant completion) [/code]
-
-    [h2] Enable Turbo Mode [/h2]
-    Enable or disable Turbo Mode to speed up fishing actions.
-    [code] Default: true [/code]
-
-    [h2] Turbo Speed [/h2]
-    Set the speed multiplier for Turbo Mode.
-    [code] Default: 3 (3x speed multiplier) [/code]
-
-    [h2] Enable Stamina Check [/h2]
-    Enable or disable the stamina check during fishing.
-    [code] Default: true [/code]
-
-    [h2] Should Cancel [/h2]
-    Control whether the fishing action should cancel on specific conditions (e.g., low stamina).
-    [code] Default: true [/code]
-
-    [h2] Stamina Threshold [/h2]
-    Set the minimum stamina required to continue fishing.
-    If the owner's stamina drops below this value, the fishing action will cancel.
-    [code] Default: 1 [/code]
+    [h1] Configuration Menu [/h1]
+    Access the in-game menu to customize all features easily. Adjust settings for:
+    [list]
+    [*]Enabling or disabling the mod
+    [*]Customizing hit values for fish progress
+    [*]Turbo Mode settings for faster fishing actions
+    [*]Stamina-based fishing behavior
+    [*]Item multipliers for caught items
+    [*]Blessed state customization for caught items
+    [/list]
 
     [h1] Configuration File Location [/h1]
+    If needed, users can also edit the configuration file directly:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    瞬時に魚を釣り上げます。カスタマイズ可能な設定で釣り体験を調整できます。
+    瞬時に魚を釣り上げることができ、カスタマイズ可能な設定を備えた便利なゲーム内設定メニューを導入しました。
+    [list]
+    [*][b]新機能[/b]: すべてのMOD設定を管理する包括的な設定メニューを追加。
+    [*][b]新機能[/b]: 捕まえるアイテム数を増やすための倍率オプションを追加。
+    [*][b]新機能[/b]: 捕まえるアイテムにカスタム祝福状態を設定するオプションを追加。
+    [*]ゲームを再起動する必要はありません。変更は即座に反映されます。
+    [/list]
 
-    - 釣りの進行の遅延を取り除きます。
-    - MOD全体を有効または無効にするオプションが含まれています。
-    - ターボモードを使用して釣りのアクションを高速化します。
-    - スタミナベースの釣り行動でバランスの取れた体験を保証します。
-
-    [h1] 設定変数 [/h1]
-
-    [h2] インスタントフィッシングの有効化 [/h2]
-    インスタントフィッシングMODを有効または無効にします。
-    [code] デフォルト: true [/code]
-
-    [h2] ヒット値 [/h2]
-    魚の進行度に設定する値です。
-    [code] デフォルト: 100（瞬時に完了） [/code]
-
-    [h2] ターボモードの有効化 [/h2]
-    釣りのターボモードを有効または無効にします。
-    [code] デフォルト: true [/code]
-
-    [h2] ターボスピード [/h2]
-    ターボモードのスピード倍率を設定します。
-    [code] デフォルト: 3（3倍速） [/code]
-
-    [h2] スタミナチェックの有効化 [/h2]
-    釣り中のスタミナチェックを有効または無効にします。
-    [code] デフォルト: true [/code]
-
-    [h2] キャンセルの有効化 [/h2]
-    特定の条件（例: スタミナ不足）で釣りアクションをキャンセルするかどうかを設定します。
-    [code] デフォルト: true [/code]
-
-    [h2] スタミナしきい値 [/h2]
-    釣りを続けるために必要な最小スタミナを設定します。
-    所有者のスタミナがこの値を下回ると、釣りアクションがキャンセルされます。
-    [code] デフォルト: 1 [/code]
+    [h1] 設定メニュー [/h1]
+    ゲーム内のメニューにアクセスして、すべての機能を簡単にカスタマイズできます。設定可能な内容:
+    [list]
+    [*]MODの有効化または無効化
+    [*]魚の進行値のカスタマイズ
+    [*]釣りアクションを高速化するターボモードの設定
+    [*]スタミナベースの釣り行動
+    [*]捕まえるアイテム数の倍率設定
+    [*]捕まえるアイテムの祝福状態のカスタマイズ
+    [/list]
 
     [h1] 設定ファイルの場所 [/h1]
+    必要に応じて、上級ユーザーは設定ファイルを直接編集することも可能です:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
   </description>
-  <version>0.23.43</version>
+  <tags>Cheat</tags>
+  <version>0.23.46</version>
 </Meta>
