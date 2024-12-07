@@ -11,7 +11,7 @@
     [list]
     [*][b]NEW[/b]: Introduced a configuration menu for managing all mod settings.
     [*][b]NEW[/b]: Added item multipliers to increase the number of caught items.
-    [*][b]NEW[/b]: Added an option to set custom blessed states for caught items.
+    [*][b]NEW[/b]: Added an option to set blessed states for caught items.
     [*]No game restart required. Changes take effect immediately.
     [/list]
 
@@ -23,7 +23,7 @@
     [*]Turbo Mode settings for faster fishing actions
     [*]Stamina-based fishing behavior
     [*]Item multipliers for caught items
-    [*]Blessed state customization for caught items
+    [*]Blessed state for caught items
     [/list]
 
     [h1] Configuration File Location [/h1]

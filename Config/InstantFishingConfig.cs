@@ -4,6 +4,7 @@ namespace InstantFishing
 {
     internal static class InstantFishingConfig
     {
+        internal static ConfigEntry<bool> EnableMenu;
         internal static ConfigEntry<bool> EnableInstantFishingMod;
         internal static ConfigEntry<bool> EnableHitValue;
         internal static ConfigEntry<int> HitValue;
@@ -20,6 +21,15 @@ namespace InstantFishing
 
         internal static void LoadConfig(ConfigFile config)
         {
+            EnableMenu = config.Bind(
+                section: ModInfo.Name,
+                key: "Enable Menu",
+                defaultValue: true,
+                description: "Enable or disable the in-game configuration menu for the mod.\n" +
+                             "Set to 'true' to allow access to the menu, or 'false' to disable it.\n" +
+                             "ゲーム内の設定メニューを有効または無効にします。\n" +
+                             "'true' に設定するとメニューにアクセスでき、'false' に設定すると無効になります。");
+            
             EnableInstantFishingMod = config.Bind(
                 section: ModInfo.Name,
                 key: "Enable Instant Fishing Mod",
@@ -104,7 +114,7 @@ namespace InstantFishing
             EnableItemMultiplier = config.Bind(
                 section: ModInfo.Name,
                 key: "Enable Item Multiplier",
-                defaultValue: true,
+                defaultValue: false,
                 description: "Enable or disable the item multiplier during fishing.\n" +
                              "Set to 'true' to activate item multiplier logic, or 'false' to disable it.\n" +
                              "釣り中のアイテム倍率を有効または無効にします。\n" +
@@ -124,9 +134,9 @@ namespace InstantFishing
             EnableItemBlessedState = config.Bind(
                 section: ModInfo.Name,
                 key: "Enable Item Blessed State",
-                defaultValue: true,
-                description: "Enable or disable setting a custom blessed state for items.\n" +
-                             "Set to 'true' to allow items to have a custom blessed state, or 'false' to disable it.\n" +
+                defaultValue: false,
+                description: "Enable or disable setting blessed state for items.\n" +
+                             "Set to 'true' to allow items to have a blessed state, or 'false' to disable it.\n" +
                              "アイテムにカスタム祝福状態を設定するかどうかを有効または無効にします。\n" +
                              "'true' に設定するとカスタム祝福状態が許可され、'false' に設定すると無効になります。");
 

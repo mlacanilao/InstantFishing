@@ -17,7 +17,6 @@ namespace InstantFishing
         {
             InstantFishingConfig.LoadConfig(Config);
             Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: null);
-            Logger.LogInfo(data: "Plugin [Instant Fishing] is loaded!");
         }
     }
 }

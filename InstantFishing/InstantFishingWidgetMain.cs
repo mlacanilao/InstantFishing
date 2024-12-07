@@ -113,7 +113,7 @@ namespace InstantFishing
                                    "If the player's stamina drops below this value, the fishing action will cancel.",
                     toggleConfig: InstantFishingConfig.EnableStaminaCheck,
                     inputConfig: InstantFishingConfig.StaminaThreshold,
-                    minValue: 0,
+                    minValue: -9999,
                     maxValue: BaseStats.CC._maxStamina * BaseStats.CC.Evalue(ele: 62) / 100
                 );
                 
@@ -148,7 +148,7 @@ namespace InstantFishing
                     jaDescription: "アイテムの祝福状態を設定するかどうかを有効または無効にします。\n" +
                                    "アイテムを祝福状態または通常状態にするかを選択します。\n" +
                                    "'true' に設定すると祝福されたアイテムになり、'false' に設定すると通常のアイテムになります。",
-                    enDescription: "Enable or disable setting a custom blessed state for items.\n" +
+                    enDescription: "Enable or disable setting blessed state for items.\n" +
                                    "Determine whether items should be blessed or normal.\n" +
                                    "Set to 'true' for blessed items, or 'false' for normal items.\n",
                     toggleConfig: InstantFishingConfig.EnableItemBlessedState,
