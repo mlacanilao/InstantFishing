@@ -84,7 +84,31 @@ namespace InstantFishing
                     minValue: 0,
                     maxValue: 100
                 );
-
+                
+                AddToggleWithInputTextField(
+                    parent: scrollLayout.root,
+                    toggleName: "Enable Auto Bonito Flakes",
+                    inputLabel: "Excluded Bonito Flakes Fish List",
+                    jaDescription: "魚をかつお節フレークに自動変換する機能を有効または無効にします。\n" +
+                                   "かつお節フレークへの自動変換から除外する魚の名前またはIDのピリオド区切りリストを設定します。\n" +
+                                   "英語と日本語の名前をサポートしています。",
+                    enDescription: "Enable or disable automatic conversion of fish to bonito flakes.\n" +
+                                   "Set a period-separated list of fish names or IDs to exclude from automatic bonito flakes conversion.\n" +
+                                   "Supports both English and Japanese names.",
+                    toggleConfig: InstantFishingConfig.EnableAutoBonitoFlakes,
+                    inputConfig: InstantFishingConfig.ExcludedBonitoFlakesFishList
+                );
+                
+                AddEnableToggleWithDescription(
+                    parent: scrollLayout.root,
+                    toggleName: "Enable Auto Wine",
+                    jaDescription: "魚とかつお節を自動でワインに熟成する機能を有効または無効にします。\n" +
+                                   "'true' に設定すると魚とかつお節が自動的にワインに変換され、'false' に設定すると無効になります。",
+                    enDescription: "Enable or disable automatic aging of fish and bonito flakes into wine.\n" +
+                                   "Set to 'true' to automatically convert fish and bonito flakes into wine, or 'false' to disable the feature.",
+                    configEntry: InstantFishingConfig.EnableAutoWine
+                );
+                
                 AddToggleWithInputTextField(
                     parent: scrollLayout.root,
                     toggleName: "Enable Turbo",
@@ -155,6 +179,16 @@ namespace InstantFishing
                     dropdownConfig: InstantFishingConfig.IsBlessed,
                     jaDropdownLabel: "Is Blessed",
                     enDropdownLabel: "Is Blessed"
+                );
+                
+                AddEnableToggleWithDescription(
+                    parent: scrollLayout.root,
+                    toggleName: "Enable Zero Weight",
+                    jaDescription: "アイテムの重量をゼロに設定する機能を有効または無効にします。\n" +
+                                   "'true' に設定すると捕まえたアイテムの重量がゼロになり、'false' に設定すると元の重量が保持されます。",
+                    enDescription: "Enable or disable setting item weight to zero.\n" +
+                                   "Set to 'true' to change the weight of caught items to zero, or 'false' to retain the original weight.",
+                    configEntry: InstantFishingConfig.EnableZeroWeight
                 );
 
                 ToggleFeatures(isEnabled: InstantFishingConfig.EnableInstantFishingMod.Value);
@@ -324,6 +358,93 @@ namespace InstantFishing
                     );
                 };
 
+                void ToggleLayout(bool isEnabled)
+                {
+                    if (layoutGroup != null)
+                    {
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = isEnabled;
+                            canvasGroup.blocksRaycasts = isEnabled;
+                            canvasGroup.alpha = isEnabled ? 1f : 0.5f;
+                        }
+                    }
+                }
+            }
+            
+            private void AddToggleWithInputTextField(
+                Transform parent, 
+                string toggleName, 
+                string inputLabel, 
+                string jaDescription, 
+                string enDescription, 
+                ConfigEntry<bool> toggleConfig, 
+                ConfigEntry<string> inputConfig)
+            {
+                // Add the description for the toggle and input field
+                base.AddText(
+                    text: OmegaUI.__(ja: jaDescription, en: enDescription),
+                    parent: parent
+                );
+
+                OmegaLayout<object>.LayoutGroup layoutGroup = null;
+                CanvasGroup canvasGroup = null;
+
+                // Add the toggle
+                base.AddToggle(
+                    text: OmegaUI.__(ja: toggleName, en: toggleName),
+                    isOn: toggleConfig.Value,
+                    action: isOn =>
+                    {
+                        toggleConfig.Value = isOn;
+                        string status = isOn ? "enabled" : "disabled";
+                        ELayer.pc.TalkRaw(text: $"{toggleName} is now {status}.", ref1: null, ref2: null, forceSync: false);
+                        ToggleLayout(isEnabled: isOn);
+                    },
+                    parent: parent
+                );
+
+                // Create a layout group for the input field (initially hidden)
+                layoutGroup = base.AddLayoutGroup(parent: parent);
+                layoutGroup.group.childControlWidth = false;
+                layoutGroup.group.childForceExpandWidth = false;
+
+                canvasGroup = layoutGroup.ui.gameObject.GetComponent<CanvasGroup>();
+                if (canvasGroup == null)
+                {
+                    canvasGroup = layoutGroup.ui.gameObject.AddComponent<CanvasGroup>();
+                }
+                canvasGroup.interactable = toggleConfig.Value;
+                canvasGroup.blocksRaycasts = toggleConfig.Value;
+                canvasGroup.alpha = toggleConfig.Value ? 1f : 0.5f;
+
+                // Add the input label
+                base.AddText(
+                    text: OmegaUI.__(ja: inputLabel, en: inputLabel),
+                    parent: layoutGroup.transform
+                );
+
+                // Add the input text field
+                var inputTextField = base.AddInputText(parent: layoutGroup.group.transform);
+                inputTextField.input.type = UIInputText.Type.Name;
+                inputTextField.input.field.characterLimit = 4096;
+                inputTextField.input.Text = inputConfig.Value;
+                inputTextField.transform.SetSizeWithCurrentAnchors(axis: RectTransform.Axis.Horizontal, size: 200f);
+                inputTextField.inputTransform.SetSizeWithCurrentAnchors(axis: RectTransform.Axis.Horizontal, size: 200f);
+                inputTextField.placeholder.SetActive(enable: true);
+                inputTextField.placeholderText.text = OmegaUI.__(ja: "上書き", en: "modify");
+
+                // Add value change listener
+                inputTextField.input.onValueChanged = value =>
+                {
+                    string stringValue = inputTextField.input.Text;
+                    inputConfig.Value = stringValue; // Update the config with the new string value
+                    ELayer.pc.TalkRaw(
+                        text: $"{inputLabel} set to \"{stringValue}\".",
+                        ref1: null, ref2: null, forceSync: false
+                    );
+                };
+                
                 void ToggleLayout(bool isEnabled)
                 {
                     if (layoutGroup != null)
