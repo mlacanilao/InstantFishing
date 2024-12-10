@@ -113,7 +113,9 @@ namespace InstantFishing.Patches
                 InstantFishingConfig.EnableStaminaCheck?.Value == true &&
                 __instance.owner.stamina.value <= (InstantFishingConfig.StaminaThreshold?.Value ?? 1))
             {
-                ELayer.pc.TalkRaw(text: $"You are too tired.", ref1: null, ref2: null, forceSync: false);
+                string ja = "疲れすぎています。";
+                string en = "You are too tired.";
+                ELayer.pc.TalkRaw(text: Lang.Game.Get(id: OmegaUI.__(ja: ja, en: en)), ref1: null, ref2: null, forceSync: false);
                 AI_Fish.shouldCancel = InstantFishingConfig.ShouldCancel?.Value ?? true;
             }
         }
