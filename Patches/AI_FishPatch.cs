@@ -57,6 +57,16 @@ namespace InstantFishing.Patches
 
                     if (craftedItem != null)
                     {
+                        if (InstantFishingConfig.EnableInstantFishingMod?.Value == true &&
+                            InstantFishingConfig.EnableItemBlessedState?.Value == true)
+                        {
+                            BlessedState newState = InstantFishingConfig.IsBlessed?.Value == true
+                                ? BlessedState.Blessed
+                                : BlessedState.Normal;
+
+                            craftedItem.SetBlessedState(s: newState);
+                        }
+                        
                         int costSP = aiCrafter.crafter.CostSP;
                         int xp = costSP * 12 *
                             (100 + 1 * 2) / 100;
@@ -107,14 +117,32 @@ namespace InstantFishing.Patches
 
                     brewery.OnChildDecay(c: fish, firstDecay: true);
                 }
+                
+                var allWine = inventory.Where(t =>
+                    t.source.name != null &&
+                    (t.source.name == "wine" || t.source.name == "ワイン")
+                ).ToList();
+                
+                foreach (var wine in allWine)
+                {
+                    if (InstantFishingConfig.EnableInstantFishingMod?.Value == true &&
+                        InstantFishingConfig.EnableItemBlessedState?.Value == true)
+                    {
+                        BlessedState newState = InstantFishingConfig.IsBlessed?.Value == true
+                            ? BlessedState.Blessed
+                            : BlessedState.Normal;
+
+                        wine.SetBlessedState(s: newState);
+                    }
+                }
             }
             
             if (InstantFishingConfig.EnableInstantFishingMod?.Value == true &&
                 InstantFishingConfig.EnableStaminaCheck?.Value == true &&
                 __instance.owner.stamina.value <= (InstantFishingConfig.StaminaThreshold?.Value ?? 1))
             {
-                string ja = "疲れすぎています。";
                 string en = "You are too tired.";
+                string ja = "疲れすぎています。";
                 ELayer.pc.TalkRaw(text: Lang.Game.Get(id: OmegaUI.__(ja: ja, en: en)), ref1: null, ref2: null, forceSync: false);
                 AI_Fish.shouldCancel = InstantFishingConfig.ShouldCancel?.Value ?? true;
             }
