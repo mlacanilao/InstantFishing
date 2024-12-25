@@ -464,14 +464,14 @@
                         </vlayout>
 
                         <vlayout>
-                            <toggle id="enableInstantBonitoFlakesToggle">
-                                <contentId>hidden</contentId>
+                            <toggle id="hidden01">
+                                <contentId>hidden01</contentId>
                             </toggle>
                         </vlayout>
 
                         <vlayout>
-                            <toggle id="enableInstantBonitoFlakesToggle">
-                                <contentId>hidden</contentId>
+                            <toggle id="hidden02">
+                                <contentId>hidden02</contentId>
                             </toggle>
                         </vlayout>
                     </hlayout>

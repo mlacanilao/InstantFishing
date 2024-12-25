@@ -349,6 +349,12 @@ namespace InstantFishing.UI
                         InstantFishingConfig.UpdateSelectedFishIds(selectedFishIds);
                     };
                 }
+                
+                var hidden01 = builder.GetPreBuild<OptToggle>(id: "hidden01");
+                hidden01.Enabled = false;
+                
+                var hidden02 = builder.GetPreBuild<OptToggle>(id: "hidden02");
+                hidden02.Enabled = false;
             };
         }
     }
