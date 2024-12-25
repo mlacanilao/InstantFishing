@@ -76,10 +76,10 @@
             </vlayout>
         </vlayout>
         
-        <vlayout id="vlayout02" border="true">
+        <vlayout id="vlayout07" border="true">
             <title>title06</title>
 
-            <vlayout id="vlayout14" border="true">
+            <vlayout id="vlayout08" border="true">
                 <title>title15</title>
                 <toggle id="enableAutoFishToggle">
                     <contentId>toggle15</contentId>
@@ -87,7 +87,7 @@
                 </toggle>
             </vlayout>
             
-            <vlayout id="vlayout07" border="true">
+            <vlayout id="vlayout09" border="true">
                 <title>title07</title>
                 <toggle id="enableTurboModeToggle">
                     <contentId>toggle05</contentId>
@@ -111,7 +111,7 @@
                 </one_choice>
             </vlayout>
 
-            <vlayout id="vlayout08" border="true">
+            <vlayout id="vlayout10" border="true">
                 <title>title09</title>
                 <toggle id="enableStaminaThresholdToggle">
                     <contentId>toggle07</contentId>
@@ -135,7 +135,7 @@
                 </one_choice>
             </vlayout>
 
-            <vlayout id="vlayout09" border="true">
+            <vlayout id="vlayout11" border="true">
                 <title>title12</title>
                 <toggle id="enableAutoEatToggle">
                     <contentId>toggle12</contentId>
@@ -163,7 +163,7 @@
                 </one_choice>
             </vlayout>
 
-            <vlayout id="vlayout10" border="true">
+            <vlayout id="vlayout12" border="true">
                 <title>title13</title>
                 <toggle id="enableAutoSleepToggle">
                     <contentId>toggle13</contentId>
@@ -190,7 +190,7 @@
                 </toggle>
             </vlayout>
 
-            <vlayout id="vlayout11" border="true">
+            <vlayout id="vlayout14" border="true">
                 <title>title11</title>
                 <toggle id="enableWinterFishingToggle">
                     <contentId>toggle11</contentId>
@@ -198,7 +198,7 @@
                 </toggle>
             </vlayout>
 
-            <vlayout id="vlayout12" border="true">
+            <vlayout id="vlayout15" border="true">
                 <title>title10</title>
                 <toggle id="enableAnimationsToggle">
                     <contentId>toggle09</contentId>
@@ -215,6 +215,268 @@
                     <tooltip>tooltip10</tooltip>
                 </toggle>
             </vlayout>
+        </vlayout>
+    </hlayout>
+    <hlayout id="hlayout02">
+        <vlayout id="vlayout16" border="true">
+        <title>title01</title>
+            
+            <hlayout id="hlayout03">
+                <vlayout id="vlayout17" border="true">
+                    <title>title16</title>
+                    <toggle id="enableInstantBonitoFlakesToggle">
+                        <contentId>toggle16</contentId>
+                        <tooltip>tooltip16</tooltip>
+                    </toggle>
+                </vlayout>
+                
+                <vlayout id="vlayout18" border="true">
+                    <title>title17</title>
+                    <toggle id="enableInstantWineToggle">
+                        <contentId>toggle17</contentId>
+                        <tooltip>tooltip17</tooltip>
+                    </toggle>
+                </vlayout>
+            </hlayout>
+
+            <hlayout id="hlayout04">
+                <vlayout id="vlayout19" border="true">
+                    <title>title18</title>
+                    <hlayout id="hlayout05">
+                        <vlayout id="vlayout20">
+                            <toggle id="ancientFishToggle">
+                                <contentId>toggle18</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout21">
+                            <toggle id="arowanaToggle">
+                                <contentId>toggle19</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout22">
+                            <toggle id="bassToggle">
+                                <contentId>toggle20</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout23">
+                            <toggle id="bitterlingToggle">
+                                <contentId>toggle21</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+
+                    <hlayout id="hlayout06">
+                        <vlayout id="vlayout24">
+                            <toggle id="blackBassToggle">
+                                <contentId>toggle22</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout25">
+                            <toggle id="blowfishToggle">
+                                <contentId>toggle23</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout26">
+                            <toggle id="bonitoToggle">
+                                <contentId>toggle24</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout27">
+                            <toggle id="carpToggle">
+                                <contentId>toggle25</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+
+                    <hlayout id="hlayout07">
+                        <vlayout id="vlayout28">
+                            <toggle id="coelacanthToggle">
+                                <contentId>toggle26</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout29">
+                            <toggle id="deepSeaFishToggle">
+                                <contentId>toggle27</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout30">
+                            <toggle id="eelToggle">
+                                <contentId>toggle28</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout31">
+                            <toggle id="flatfishToggle">
+                                <contentId>toggle29</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+
+                    <hlayout id="hlayout08">
+                        <vlayout id="vlayout32">
+                            <toggle id="gobyToggle">
+                                <contentId>toggle30</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout33">
+                            <toggle id="goldfishToggle">
+                                <contentId>toggle31</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout34">
+                            <toggle id="mackerelToggle">
+                                <contentId>toggle32</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout35">
+                            <toggle id="moonfishToggle">
+                                <contentId>toggle33</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+
+                    <hlayout id="hlayout09">
+                        <vlayout id="vlayout36">
+                            <toggle id="muddlerToggle">
+                                <contentId>toggle34</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout37">
+                            <toggle id="redBreamToggle">
+                                <contentId>toggle35</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout38">
+                            <toggle id="salmonToggle">
+                                <contentId>toggle36</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout39">
+                            <toggle id="sandBorerToggle">
+                                <contentId>toggle37</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+
+                    <hlayout id="hlayout10">
+                        <vlayout id="vlayout40">
+                            <toggle id="sardineToggle">
+                                <contentId>toggle38</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout41">
+                            <toggle id="scadToggle">
+                                <contentId>toggle39</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout42">
+                            <toggle id="seaBreamToggle">
+                                <contentId>toggle40</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout43">
+                            <toggle id="seaUrchinToggle">
+                                <contentId>toggle41</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+
+                    <hlayout id="hlayout11">
+                        <vlayout id="vlayout44">
+                            <toggle id="sharkToggle">
+                                <contentId>toggle42</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout45">
+                            <toggle id="stripedJackToggle">
+                                <contentId>toggle43</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout46">
+                            <toggle id="sunfishToggle">
+                                <contentId>toggle44</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout47">
+                            <toggle id="sweetfishToggle">
+                                <contentId>toggle45</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+
+                    <hlayout id="hlayout12">
+                        <vlayout id="vlayout48">
+                            <toggle id="tadpoleToggle">
+                                <contentId>toggle46</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout49">
+                            <toggle id="tilefishToggle">
+                                <contentId>toggle47</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout50">
+                            <toggle id="tuna1Toggle">
+                                <contentId>toggle48</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout51">
+                            <toggle id="tuna2Toggle">
+                                <contentId>toggle49</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+
+                    <hlayout id="hlayout13">
+                        <vlayout id="vlayout52">
+                            <toggle id="turtleToggle">
+                                <contentId>toggle50</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout id="vlayout53">
+                            <toggle id="whaleToggle">
+                                <contentId>toggle51</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout>
+                            <toggle id="enableInstantBonitoFlakesToggle">
+                                <contentId>hidden</contentId>
+                            </toggle>
+                        </vlayout>
+
+                        <vlayout>
+                            <toggle id="enableInstantBonitoFlakesToggle">
+                                <contentId>hidden</contentId>
+                            </toggle>
+                        </vlayout>
+                    </hlayout>
+                </vlayout>
+            </hlayout>
         </vlayout>
     </hlayout>
 </config>

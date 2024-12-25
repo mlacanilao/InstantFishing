@@ -27,6 +27,8 @@
     [*]Item multipliers.
     [*]Apply blessed states (Normal, Cursed, Doomed, or Blessed).
     [*]Set item weights to zero.
+    [*]Instantly convert fish items into bonito flakes.
+    [*]Instantly convert fish items into wine.
     [/list]
 
     [h1] Compatibility [/h1]
@@ -42,12 +44,10 @@
     If needed, users can also edit the configuration file directly:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    Supports Game Version: 0.23.66
+    Supports Game Version: 0.23.67
 
     [h1] 快適さの向上 [/h1]
     [list]
-    [*]かつお節を自動で変換する機能（カスタマイズ可能な除外リスト付き、アイテムはメインインベントリに必要です）。
-    [*]魚とかつお節を自動的にワインに変換する機能（アイテムはメインインベントリに必要です）。
     [*]インベントリが満杯の場合に釣りアイテムをコンテナに自動的に移動。
     [*]自動ダンプまたは自動睡眠の後に自動釣りを開始。
     [*]釣りアクションを高速化するターボモードの設定。
@@ -65,6 +65,8 @@
     [*]捕まえたアイテムに祝福状態を適用（通常、呪われた、厄運、祝福）。
     [*]捕まえたアイテムの重量をゼロに設定。
     [*]釣りアクションの経験値倍率。
+    [*]魚アイテムを即座にかつお節に変換。
+    [*]魚アイテムを即座にワインに変換。
     [/list]
 
     [h1] 互換性 [/h1]
@@ -80,8 +82,8 @@
     必要に応じて、上級ユーザーは設定ファイルを直接編集することも可能です:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    対応ゲームバージョン: 0.23.66
+    対応ゲームバージョン: 0.23.67
   </description>
   <tags>QoL, Cheat</tags>
-  <version>0.23.66</version>
+  <version>0.23.67</version>
 </Meta>

@@ -12,6 +12,44 @@ namespace InstantFishing.UI
 {
     public static class UIController
     {
+        private static readonly Dictionary<string, string> ToggleMappings = new Dictionary<string, string>
+        {
+            { "ancientFish", "92" },
+            { "arowana", "74" },
+            { "bass", "69" },
+            { "bitterling", "62" },
+            { "blackBass", "77" },
+            { "blowfish", "83" },
+            { "bonito", "81" },
+            { "carp", "65" },
+            { "coelacanth", "90" },
+            { "deepSeaFish", "91" },
+            { "eel", "66" },
+            { "flatfish", "84" },
+            { "goby", "67" },
+            { "goldfish", "64" },
+            { "mackerel", "78" },
+            { "moonfish", "95" },
+            { "muddler", "68" },
+            { "redBream", "79" },
+            { "salmon", "87" },
+            { "sandBorer", "88" },
+            { "sardine", "85" },
+            { "scad", "72" },
+            { "seaBream", "86" },
+            { "seaUrchin", "70" },
+            { "shark", "93" },
+            { "stripedJack", "76" },
+            { "sunfish", "94" },
+            { "sweetfish", "75" },
+            { "tadpole", "63" },
+            { "tilefish", "71" },
+            { "tuna1", "73" },
+            { "tuna2", "82" },
+            { "turtle", "80" },
+            { "whale", "89" }
+        };
+        
         public static void RegisterUI()
         {
             foreach (var obj in ModManager.ListPluginObject)
@@ -47,10 +85,19 @@ namespace InstantFishing.UI
         {
             controller.OnBuildUI += builder =>
             {
-                var hlayout = builder.GetPreBuild<OptHLayout>(id: "hlayout01");
-                hlayout.Base.childForceExpandHeight = false;
+                for (int i = 1; i <= 13; i++)
+                {
+                    string hlayoutId = $"hlayout{i:D2}";
+
+                    var hlayout = builder.GetPreBuild<OptHLayout>(id: hlayoutId);
+        
+                    if (hlayout != null)
+                    {
+                        hlayout.Base.childForceExpandHeight = false;
+                    }
+                }
                 
-                for (int i = 1; i <= 14; i++)
+                for (int i = 1; i <= 53; i++)
                 {
                     string vlayoutId = $"vlayout{i:D2}";
 
@@ -250,21 +297,25 @@ namespace InstantFishing.UI
                     InstantFishingConfig.EnableAutoSleep.Value = isChecked;
                 };
                 
-                var autoSleepDropdownMapping = new Dictionary<int, int>
-                {
-                    { 0, 1 }, // Sleepy -> 1
-                    { 1, 2 }, // VerySleepy -> 2
-                    { 2, 3 } // VeryVerySleepy -> 3
-                };
-                
                 var autoSleepDropdown = builder.GetPreBuild<OptDropdown>(id: "autoSleepDropdown");
                 autoSleepDropdown.Value = InstantFishingConfig.AutoSleepThreshold.Value - 1;
                 autoSleepDropdown.OnValueChanged += index =>
                 {
-                    if (autoSleepDropdownMapping.TryGetValue(key: index, value: out int mappedValue))
-                    {
-                        InstantFishingConfig.AutoSleepThreshold.Value = mappedValue;
-                    }
+                    InstantFishingConfig.AutoSleepThreshold.Value = index + 1;
+                };
+                
+                var enableInstantBonitoFlakesToggle = builder.GetPreBuild<OptToggle>(id: "enableInstantBonitoFlakesToggle");
+                enableInstantBonitoFlakesToggle.Checked = InstantFishingConfig.enableInstantBonitoFlakes.Value;
+                enableInstantBonitoFlakesToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.enableInstantBonitoFlakes.Value = isChecked;
+                };
+                
+                var enableInstantWineToggle = builder.GetPreBuild<OptToggle>(id: "enableInstantWineToggle");
+                enableInstantWineToggle.Checked = InstantFishingConfig.enableInstantWine.Value;
+                enableInstantWineToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.enableInstantWine.Value = isChecked;
                 };
                 
                 var enableAutoDumpToggle = builder.GetPreBuild<OptToggle>(id: "enableAutoDumpToggle");
@@ -273,6 +324,31 @@ namespace InstantFishing.UI
                 {
                     InstantFishingConfig.EnableAutoDump.Value = isChecked;
                 };
+
+                var selectedFishIds = InstantFishingConfig.SelectedFishIds;
+                
+                foreach (var mapping in ToggleMappings)
+                {
+                    var fish = mapping.Key;
+                    var fishId = mapping.Value;
+
+                    var toggle = builder.GetPreBuild<OptToggle>(id: $"{fish}Toggle");
+                    toggle.Checked = selectedFishIds.Contains(item: fishId);
+                    toggle.OnValueChanged += isChecked =>
+                    {
+                        if (isChecked)
+                        {
+                            if (!selectedFishIds.Contains(fishId))
+                                selectedFishIds.Add(fishId);
+                        }
+                        else
+                        {
+                            selectedFishIds.Remove(fishId);
+                        }
+
+                        InstantFishingConfig.UpdateSelectedFishIds(selectedFishIds);
+                    };
+                }
             };
         }
     }

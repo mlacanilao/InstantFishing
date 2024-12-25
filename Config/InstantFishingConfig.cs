@@ -33,11 +33,26 @@ namespace InstantFishing.Config
         internal static ConfigEntry<bool> EnableAutoSleep;
         internal static ConfigEntry<int> AutoSleepThreshold;
         internal static ConfigEntry<bool> EnableAutoDump;
+        internal static ConfigEntry<bool> enableInstantBonitoFlakes;
+        internal static ConfigEntry<bool> enableInstantWine;
+        
+        // Fish
+        internal static ConfigEntry<string> _selectedFishIds;
+        
+        internal static List<string> SelectedFishIds =>
+            _selectedFishIds?.Value.Split(separator: ',')
+                .Select(selector: id => id.Trim())
+                .Where(predicate: id => !string.IsNullOrEmpty(value: id))
+                .ToList() ?? new List<string>();
+        
+        internal static void UpdateSelectedFishIds(List<string> selectedFishIdsList)
+        {
+            _selectedFishIds.Value = string.Join(separator: ",", values: selectedFishIdsList);
+        }
         
         internal static string XmlPath { get; private set; }
         internal static string TranslationXlsxPath { get; private set; }
-
-
+        
         internal static void LoadConfig(ConfigFile config)
         {
             EnableInstantFishing = config.Bind(
@@ -246,7 +261,7 @@ namespace InstantFishing.Config
             EnableAutoEat = config.Bind(
                 section: ModInfo.Name,
                 key: "Enable Auto Eat",
-                defaultValue: true,
+                defaultValue: false,
                 description: "Enable or disable automatic eating when hunger threshold is reached.\n" +
                              "Set to 'true' to automatically consume food, or 'false' to disable this feature.\n" +
                              "空腹状態が一定のしきい値に達したときに自動で食事を行う機能を有効または無効にします。\n" +
@@ -282,7 +297,7 @@ namespace InstantFishing.Config
             AutoSleepThreshold = config.Bind(
                 section: ModInfo.Name,
                 key: "Auto Sleep Threshold",
-                defaultValue: 0,
+                defaultValue: 1,
                 description: "Set the sleepiness level at which automatic sleeping is triggered.\n" +
                              "Available levels are: 1 (Sleepy), 2 (Very Sleepy), 3 (Very Very Sleepy).\n" +
                              "自動で睡眠を行う眠気レベルを設定します。\n" +
@@ -301,6 +316,57 @@ namespace InstantFishing.Config
                              "'true' に設定するとアイテムが自動でコンテナに移動され、'false' に設定すると無効になります。\n" +
                              "当库存已满时启用或禁用自动将钓鱼物品放入容器。\n" +
                              "设置为 'true' 自动放置物品，设置为 'false' 禁用此功能。"
+            );
+            
+            enableInstantBonitoFlakes = config.Bind(
+                section: ModInfo.Name,
+                key: "Enable Instant Bonito Flakes",
+                defaultValue: false,
+                description: "Enable or disable instantly turning selected fish into bonito flakes.\n" +
+                             "Set to 'true' to instantly convert selected fish into bonito flakes, or 'false' to disable the feature.\n" +
+                             "選択した魚を即座にかつお節に変換する機能を有効または無効にします。\n" +
+                             "'true' に設定すると選択した魚を即座にかつお節に変換し、'false' に設定すると無効になります。\n" +
+                             "启用或禁用将选定鱼类即时转化为柴鱼片。\n" +
+                             "设置为 'true' 可即时将选定鱼类转化为柴鱼片，设置为 'false' 则禁用此功能。"
+            );
+            
+            enableInstantWine = config.Bind(
+                section: ModInfo.Name,
+                key: "Enable Instant Wine",
+                defaultValue: false,
+                description: "Enable or disable instantly turning all fish items into wine.\n" +
+                             "Set to 'true' to instantly convert all fish items into wine, or 'false' to disable the feature.\n" +
+                             "すべての魚アイテムを即座にワインに変換する機能を有効または無効にします。\n" +
+                             "'true' に設定するとすべての魚アイテムを即座にワインに変換し、'false' に設定すると無効になります。\n" +
+                             "启用或禁用将所有鱼类物品即时转化为葡萄酒。\n" +
+                             "设置为 'true' 可即时将所有鱼类物品转化为葡萄酒，设置为 'false' 则禁用此功能。"
+            );
+            
+            _selectedFishIds = config.Bind(
+                section: ModInfo.Name,
+                key: "SelectedFishIds",
+                defaultValue: "74,69,62,77,83,81,65,66,84,67,64,78,95,68,79,87,88,85,72,86,70,76,75,63,71,73,82,80",
+                description: "Comma-separated list of fish IDs to use with the Instant Bonito Flakes feature.\n" +
+                             "Relates to the following fish:\n" +
+                             "Ancient Fish (92), Arowana (74), Bass (69), Bitterling (62), Black Bass (77), Blowfish (83), Bonito (81), Carp (65),\n" +
+                             "Coelacanth (90), Deep Sea Fish (91), Eel (66), Flatfish (84), Goby (67), Goldfish (64), Mackerel (78),\n" +
+                             "Moonfish (95), Muddler (68), Red Bream (79), Salmon (87), Sand Borer (88), Sardine (85), Scad (72),\n" +
+                             "Sea Bream (86), Sea Urchin (70), Shark (93), Striped Jack (76), Sunfish (94), Sweetfish (75), Tadpole (63),\n" +
+                             "Tilefish (71), Tuna 1 (73), Tuna 2 (82), Turtle (80), Whale (89).\n" +
+                             "即席かつお節機能で使用する魚のIDのカンマ区切りリストです。\n" +
+                             "次の魚に関連付けられています:\n" +
+                             "古代魚 (92)、アロワナ (74)、バス (69)、ビタリング (62)、ブラックバス (77)、フグ (83)、カツオ (81)、コイ (65)、\n" +
+                             "シーラカンス (90)、深海魚 (91)、ウナギ (66)、ヒラメ (84)、ゴビ (67)、金魚 (64)、サバ (78)、\n" +
+                             "ムーンフィッシュ (95)、マッドラー (68)、赤鯛 (79)、サーモン (87)、サンドボラー (88)、イワシ (85)、サバ (72)、\n" +
+                             "鯛 (86)、ウニ (70)、サメ (93)、シマアジ (76)、マンボウ (94)、アユ (75)、オタマジャクシ (63)、\n" +
+                             "アマダイ (71)、マグロ 1 (73)、マグロ 2 (82)、カメ (80)、クジラ (89)。\n" +
+                             "用于即时柴鱼片功能的鱼类ID的逗号分隔列表。\n" +
+                             "与以下鱼类相关:\n" +
+                             "远古鱼 (92)、龙鱼 (74)、鲈鱼 (69)、苦鱼 (62)、黑鲈 (77)、河豚 (83)、鲣鱼 (81)、鲤鱼 (65)、\n" +
+                             "腔棘鱼 (90)、深海鱼 (91)、鳗鱼 (66)、比目鱼 (84)、虾虎鱼 (67)、金鱼 (64)、鲭鱼 (78)、\n" +
+                             "月鱼 (95)、泥鳅 (68)、红鲷鱼 (79)、三文鱼 (87)、沙钻鱼 (88)、沙丁鱼 (85)、竹荚鱼 (72)、\n" +
+                             "真鲷 (86)、海胆 (70)、鲨鱼 (93)、条纹鰺 (76)、翻车鱼 (94)、香鱼 (75)、蝌蚪 (63)、\n" +
+                             "瓦鱼 (71)、金枪鱼 1 (73)、金枪鱼 2 (82)、海龟 (80)、鲸鱼 (89)。"
             );
         }
         
