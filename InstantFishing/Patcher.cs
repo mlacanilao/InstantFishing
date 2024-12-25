@@ -1,5 +1,6 @@
 using InstantFishing.Patches;
 using HarmonyLib;
+using UnityEngine;
 
 namespace InstantFishing
 {
@@ -7,45 +8,80 @@ namespace InstantFishing
     public class Patcher
     {
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(AIAct), nameof(AIAct.Start))]
-        public static void Start(AIAct __instance)
+        [HarmonyPatch(declaringType: typeof(AIAct), methodName: nameof(AIAct.Start))]
+        public static void AIActStart(AIAct __instance)
         {
-            AI_ActPatch.Start(__instance: __instance);
+            AI_ActPatch.StartPostfix(__instance: __instance);
+        }
+        
+        [HarmonyPostfix]
+        [HarmonyPatch(declaringType: typeof(AIAct), methodName: nameof(AIAct.Reset))]
+        public static void AIActReset(AIAct __instance)
+        {
+            AI_ActPatch.ResetPostfix(__instance: __instance);
         }
 
         [HarmonyPrefix]
-        [HarmonyPatch(typeof(AI_Fish.ProgressFish), nameof(AI_Fish.ProgressFish.OnProgress))]
-        public static void OnProgress(AI_Fish.ProgressFish __instance)
+        [HarmonyPatch(declaringType: typeof(AI_Fish.ProgressFish), methodName: nameof(AI_Fish.ProgressFish.OnProgress))]
+        public static void AI_FishOnProgress(AI_Fish.ProgressFish __instance)
         {
-            AI_FishPatch.OnProgress(__instance: __instance);
+            AI_FishPatch.OnProgressPrefix(__instance: __instance);
         }
         
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(AI_Fish.ProgressFish), nameof(AI_Fish.ProgressFish.OnProgressComplete))]
-        public static void OnProgressComplete(AI_Fish.ProgressFish __instance)
+        [HarmonyPatch(declaringType: typeof(AI_Fish.ProgressFish), methodName: nameof(AI_Fish.ProgressFish.OnProgressComplete))]
+        public static void AI_FishProgressFishOnProgressComplete(AI_Fish.ProgressFish __instance)
         {
-            AI_FishPatch.OnProgressComplete(__instance: __instance);
+            AI_FishPatch.OnProgressCompletePostifx(__instance: __instance);
         }
         
         [HarmonyPrefix]
-        [HarmonyPatch(typeof(AI_Fish.ProgressFish), nameof(AI_Fish.ProgressFish.Ripple))]
-        public static bool Ripple()
+        [HarmonyPatch(declaringType: typeof(AI_Fish.ProgressFish), methodName: nameof(AI_Fish.ProgressFish.Ripple))]
+        public static bool AI_FishProgressFishRipple(AI_Fish.ProgressFish __instance)
         {
-            return AI_FishPatch.Ripple();
+            return AI_FishPatch.RipplePrefix(__instance: __instance);
         }
         
         [HarmonyPostfix]
-        [HarmonyPatch(declaringType: typeof(UIContextMenuManager), methodName: nameof(UIContextMenuManager.Create))]
-        public static void UIContextMenuManager_Create(UIContextMenuManager __instance, string menuName = "ContextMenu", bool destroyOnHide = true)
+        [HarmonyPatch(declaringType: typeof(AI_Fish), methodName: nameof(AI_Fish.Makefish))]
+        public static void AI_FishMakefish(AI_Fish __instance, ref Thing __result)
         {
-            UIContextMenuManagerPatch.Create(__instance: __instance, menuName: menuName, destroyOnHide: destroyOnHide);
+            AI_FishPatch.MakefishPostfix(__instance: __instance, __result: __result);
+        }
+        
+        [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(ElementContainer), methodName: nameof(ElementContainer.ModExp))]
+        public static void ElementContainerModExp(ElementContainer __instance, int ele, ref int a)
+        {
+            ElementContainerPatch.ModExpPrefix(__instance: __instance, ele: ele, a: ref a);
+        }
+        
+        [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(CardRenderer), methodName: nameof(CardRenderer.PlayAnime), argumentTypes: new[] { typeof(AnimeID), typeof(Vector3), typeof(bool) })]
+        public static bool CardRendererPlayAnime(CardRenderer __instance, AnimeID id)
+        {
+            return CardRendererPatch.PlayAnimePrefix(__instance: __instance, id: id);
+        }
+        
+        [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(Card), methodName: nameof(Card.PlaySound))]
+        public static bool CardPlaySound(Card __instance, string id)
+        {
+            return CardPatch.PlaySoundPrefix(__instance: __instance, id: id);
+        }
+        
+        [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(Cell), methodName: nameof(Cell.IsTopWaterAndNoSnow), methodType: MethodType.Getter)]
+        public static bool CellIsTopWaterAndNoSnow(Cell __instance, ref bool __result)
+        {
+            return CellPatch.IsTopWaterAndNoSnowPrefix(__instance: __instance, __result: ref __result);
         }
         
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(AI_Fish), nameof(AI_Fish.Makefish))]
-        public static void Makefish(ref Thing __result)
+        [HarmonyPatch(declaringType: typeof(LayerSleep), methodName: nameof(LayerSleep.Advance))]
+        public static void LayerSleepAdvance(LayerSleep __instance)
         {
-            AI_FishPatch.Makefish(__result: __result);
+            LayerSleepPatch.AdvancePostfix(__instance: __instance);
         }
     }
 }

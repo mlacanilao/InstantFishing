@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ConfigLayoutSchema.xsd">
+    <hlayout id="hlayout01">
+        <vlayout id="vlayout01" border="true">
+            <title>title01</title>
+            
+            <vlayout id="vlayout02" border="true">
+                <title>title02</title>
+                <toggle id="enableInstantFishingToggle">
+                    <contentId>toggle01</contentId>
+                    <tooltip>tooltip01</tooltip>
+                </toggle>
+            </vlayout>
+
+            <vlayout id="vlayout03" border="true">
+                <title>title05</title>
+                <toggle id="enableExperienceMultiplierToggle">
+                    <contentId>toggle04</contentId>
+                    <tooltip>tooltip04</tooltip>
+                </toggle>
+                <slider id="experienceSlider" min="1" max="9999" buttons="true"></slider>
+                <topic>topic01</topic>
+                <one_choice id="experienceSliderDropdown" type="dropdown">
+                    <choice>
+                        <contentId>1</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>10</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>100</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>1000</contentId>
+                    </choice>
+                </one_choice>
+            </vlayout>
+            
+            <vlayout id="vlayout04" border="true">
+                <title>title03</title>
+                <toggle id="enableItemMultiplierToggle">
+                    <contentId>toggle02</contentId>
+                    <tooltip>tooltip02</tooltip>
+                </toggle>
+                <slider id="itemSlider" min="1" max="10" buttons="true"></slider>
+            </vlayout>
+
+            <vlayout id="vlayout05" border="true">
+                <title>title04</title>
+                <toggle id="enableItemBlessedStateToggle">
+                    <contentId>toggle03</contentId>
+                    <tooltip>tooltip03</tooltip>
+                </toggle>
+                <one_choice id="itemBlessedStateDropdown" type="dropdown" value="2">
+                    <choice>
+                        <contentId>Doomed</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>Cursed</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>Normal</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>Blessed</contentId>
+                    </choice>
+                </one_choice>
+            </vlayout>
+
+            <vlayout id="vlayout06" border="true">
+                <title>title08</title>
+                <toggle id="enableZeroWeightToggle">
+                    <contentId>toggle06</contentId>
+                    <tooltip>tooltip06</tooltip>
+                </toggle>
+            </vlayout>
+        </vlayout>
+        
+        <vlayout id="vlayout02" border="true">
+            <title>title06</title>
+
+            <vlayout id="vlayout14" border="true">
+                <title>title15</title>
+                <toggle id="enableAutoFishToggle">
+                    <contentId>toggle15</contentId>
+                    <tooltip>tooltip15</tooltip>
+                </toggle>
+            </vlayout>
+            
+            <vlayout id="vlayout07" border="true">
+                <title>title07</title>
+                <toggle id="enableTurboModeToggle">
+                    <contentId>toggle05</contentId>
+                    <tooltip>tooltip05</tooltip>
+                </toggle>
+                <slider id="turboModeSlider" min="1" max="9999" buttons="true"></slider>
+                <topic>topic01</topic>
+                <one_choice id="turboModeDropdown" type="dropdown">
+                    <choice>
+                        <contentId>1</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>10</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>100</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>1000</contentId>
+                    </choice>
+                </one_choice>
+            </vlayout>
+
+            <vlayout id="vlayout08" border="true">
+                <title>title09</title>
+                <toggle id="enableStaminaThresholdToggle">
+                    <contentId>toggle07</contentId>
+                    <tooltip>tooltip07</tooltip>
+                </toggle>
+                <slider id="staminaThresholdSlider" min="-9999" max="9999" buttons="true"></slider>
+                <topic>topic01</topic>
+                <one_choice id="staminaThresholdDropdown" type="dropdown">
+                    <choice>
+                        <contentId>1</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>10</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>100</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>1000</contentId>
+                    </choice>
+                </one_choice>
+            </vlayout>
+
+            <vlayout id="vlayout09" border="true">
+                <title>title12</title>
+                <toggle id="enableAutoEatToggle">
+                    <contentId>toggle12</contentId>
+                    <tooltip>tooltip12</tooltip>
+                </toggle>
+                <one_choice id="autoEatDropdown" type="dropdown" value="2">
+                    <choice>
+                        <contentId>choice01</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>choice02</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>choice03</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>choice04</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>choice05</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>choice06</contentId>
+                    </choice>
+                </one_choice>
+            </vlayout>
+
+            <vlayout id="vlayout10" border="true">
+                <title>title13</title>
+                <toggle id="enableAutoSleepToggle">
+                    <contentId>toggle13</contentId>
+                    <tooltip>tooltip13</tooltip>
+                </toggle>
+                <one_choice id="autoSleepDropdown" type="dropdown" value="0">
+                    <choice>
+                        <contentId>choice07</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>choice08</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>choice09</contentId>
+                    </choice>
+                </one_choice>
+            </vlayout>
+
+            <vlayout id="vlayout13" border="true">
+                <title>title14</title>
+                <toggle id="enableAutoDumpToggle">
+                    <contentId>toggle14</contentId>
+                    <tooltip>tooltip14</tooltip>
+                </toggle>
+            </vlayout>
+
+            <vlayout id="vlayout11" border="true">
+                <title>title11</title>
+                <toggle id="enableWinterFishingToggle">
+                    <contentId>toggle11</contentId>
+                    <tooltip>tooltip11</tooltip>
+                </toggle>
+            </vlayout>
+
+            <vlayout id="vlayout12" border="true">
+                <title>title10</title>
+                <toggle id="enableAnimationsToggle">
+                    <contentId>toggle09</contentId>
+                    <tooltip>tooltip09</tooltip>
+                </toggle>
+                
+                <toggle id="enableRippleEffectToggle">
+                    <contentId>toggle08</contentId>
+                    <tooltip>tooltip08</tooltip>
+                </toggle>
+
+                <toggle id="enableSoundsToggle">
+                    <contentId>toggle10</contentId>
+                    <tooltip>tooltip10</tooltip>
+                </toggle>
+            </vlayout>
+        </vlayout>
+    </hlayout>
+</config>

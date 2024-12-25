@@ -5,56 +5,83 @@
   <author>OmegaPlatinum</author>
   <loadPriority>100</loadPriority>
   <description>
-    Supports Game Version: 0.23.54
-
     Instantly catch fish with customizable settings through an in-game configuration menu.
+    瞬時に魚を釣り上げることができ、カスタマイズ可能な設定を備えた便利なゲーム内設定メニューを導入しました。
+
+    [h1] Quality of Life Features [/h1]
     [list]
-    [*][b]NEW[/b]: Added auto wine feature to convert fish and bonito flakes into wine.
-    [*][b]NEW[/b]: Added the ability to set item weight to zero for caught items.
+    [*]Automatic fishing.
+    [*]Turbo Mode.
+    [*]Stamina thresholds.
+    [*]Automatic eating.
+    [*]Automatic sleeping.
+    [*]Automatic dumping of items into containers when inventory is full.
+    [*]Winter fishing.
+    [*]Enable/disable sound effects and animations.
     [/list]
 
-    [h1] Configuration Menu [/h1]
-    Access the in-game menu to customize all features easily. Adjust settings for:
+    [h1] Cheat Features [/h1]
     [list]
-    [*]Enabling or disabling the mod
-    [*]Customizing hit values for fish progress
-    [*]Automatic bonito flakes with a customizable exclusion list
-    [*]Auto wine conversion for fish and bonito flakes
-    [*]Turbo Mode settings for faster fishing actions
-    [*]Stamina-based fishing behavior
-    [*]Item multipliers for caught items
-    [*]Blessed state for caught items
-    [*]Setting item weight to zero for caught items
+    [*]Instantly catch fish.
+    [*]Experience multiplier.
+    [*]Item multipliers.
+    [*]Apply blessed states (Normal, Cursed, Doomed, or Blessed).
+    [*]Set item weights to zero.
+    [/list]
+
+    [h1] Compatibility [/h1]
+    This mod works with existing save files.
+
+    [h1] Requirements [/h1]
+    This mod requires the [b]Mod Options[/b] mod only for accessing the Config menu. The core functionality of this mod will still work without it. Please subscribe to the [b]Mod Options[/b] mod for menu-based configuration:
+    [list]
+    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3381182341]https://steamcommunity.com/sharedfiles/filedetails/?id=3381182341[/url]
     [/list]
 
     [h1] Configuration File Location [/h1]
     If needed, users can also edit the configuration file directly:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    瞬時に魚を釣り上げることができ、カスタマイズ可能な設定を備えた便利なゲーム内設定メニューを導入しました。
+    Supports Game Version: 0.23.66
+
+    [h1] 快適さの向上 [/h1]
     [list]
-    [*][b]新機能[/b]: 魚とかつお節をワインに変換する自動ワイン機能を追加。
-    [*][b]新機能[/b]: 捕まえたアイテムの重量をゼロに設定できる機能を追加。
+    [*]かつお節を自動で変換する機能（カスタマイズ可能な除外リスト付き、アイテムはメインインベントリに必要です）。
+    [*]魚とかつお節を自動的にワインに変換する機能（アイテムはメインインベントリに必要です）。
+    [*]インベントリが満杯の場合に釣りアイテムをコンテナに自動的に移動。
+    [*]自動ダンプまたは自動睡眠の後に自動釣りを開始。
+    [*]釣りアクションを高速化するターボモードの設定。
+    [*]空腹しきい値に達した場合に自動的に食事を行う機能。
+    [*]眠気しきい値に達した場合に自動で睡眠を行う機能。
+    [*]雪に覆われたエリアでの冬の釣り。
+    [*]スタミナベースの釣り行動（設定可能なしきい値付き）。
+    [*]釣り中の効果音とアニメーション。
     [/list]
 
-    [h1] 設定メニュー [/h1]
-    ゲーム内のメニューにアクセスして、すべての機能を簡単にカスタマイズできます。設定可能な内容:
+    [h1] チート [/h1]
     [list]
-    [*]MODの有効化または無効化
-    [*]魚の進行値のカスタマイズ
-    [*]釣りアクションを高速化するターボモードの設定
-    [*]スタミナベースの釣り行動
-    [*]捕まえるアイテム数の倍率設定
-    [*]捕まえるアイテムの祝福状態のカスタマイズ
-    [*]魚をかつお節に自動変換する機能とカスタマイズ可能な除外リスト
-    [*]魚とかつお節をワインに変換する自動ワイン機能
-    [*]捕まえたアイテムの重量をゼロに設定する機能
+    [*]MODを使用して瞬時に魚を釣り上げる機能。
+    [*]釣りアイテムの倍率設定。
+    [*]捕まえたアイテムに祝福状態を適用（通常、呪われた、厄運、祝福）。
+    [*]捕まえたアイテムの重量をゼロに設定。
+    [*]釣りアクションの経験値倍率。
+    [/list]
+
+    [h1] 互換性 [/h1]
+    このMODは既存のセーブデータと互換性があり、特別な設定は不要です。
+
+    [h1] 必須MOD [/h1]
+    このMODは[b]Mod Options[/b]MODが必要です。ただし、Configメニューへのアクセスのためだけです。主要な機能はこれなしでも動作します。以下のリンクから[b]Mod Options[/b]MODをサブスクライブしてください：
+    [list]
+    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3381182341]https://steamcommunity.com/sharedfiles/filedetails/?id=3381182341[/url]
     [/list]
 
     [h1] 設定ファイルの場所 [/h1]
     必要に応じて、上級ユーザーは設定ファイルを直接編集することも可能です:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
+
+    対応ゲームバージョン: 0.23.66
   </description>
-  <tags>Cheat</tags>
-  <version>0.23.54</version>
+  <tags>QoL, Cheat</tags>
+  <version>0.23.66</version>
 </Meta>
