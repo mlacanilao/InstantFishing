@@ -26,7 +26,7 @@ namespace InstantFishing
             
             InstantFishingConfig.LoadConfig(config: Config);
             
-            Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: null);
+            Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
             
             if (IsModOptionsInstalled())
             {
