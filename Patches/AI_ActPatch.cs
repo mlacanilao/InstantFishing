@@ -7,7 +7,9 @@ namespace InstantFishing.Patches
     {
         public static void StartPostfix(AIAct __instance)
         {
-            if (InstantFishingConfig.EnableTurboMode?.Value == false)
+            bool enableTurboMode = InstantFishingConfig.EnableTurboMode?.Value ?? false;
+            
+            if (enableTurboMode == false)
             {
                 return;
             }
@@ -27,7 +29,10 @@ namespace InstantFishing.Patches
         
         public static void ResetPostfix(AIAct __instance)
         {
-            if (InstantFishingConfig.EnableAutoDump?.Value == false)
+            bool enableAutoDump = InstantFishingConfig.EnableAutoDump?.Value ?? false;
+            bool enableAutoFish = InstantFishingConfig.EnableAutoFish?.Value ?? false;
+            
+            if (enableAutoDump == false)
             {
                 return;
             }
@@ -46,7 +51,7 @@ namespace InstantFishing.Patches
                     InstantFishingConfig.EnableAutoDump.Value = !InstantFishingConfig.EnableAutoDump.Value;
                 }
                 
-                if (InstantFishingConfig.EnableAutoFish?.Value == false)
+                if (enableAutoFish == false)
                 {
                     return;
                 }

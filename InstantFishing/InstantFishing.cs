@@ -10,7 +10,7 @@ namespace InstantFishing
     {
         internal const string Guid = "omegaplatinum.elin.instantfishing";
         internal const string Name = "Instant Fishing";
-        internal const string Version = "2.1.0.0";
+        internal const string Version = "2.1.2.0";
         internal const string ModOptionsGuid = "evilmask.elinplugins.modoptions";
         internal const string ModOptionsAssemblyName = "ModOptions";
     }
@@ -19,15 +19,18 @@ namespace InstantFishing
     internal class InstantFishing : BaseUnityPlugin
     {
         internal static InstantFishing Instance { get; private set; }
-        
-        private void Start()
+
+        private void Awake()
         {
             Instance = this;
             
             InstantFishingConfig.LoadConfig(config: Config);
             
             Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
-            
+        }
+
+        private void Start()
+        {
             if (IsModOptionsInstalled())
             {
                 try

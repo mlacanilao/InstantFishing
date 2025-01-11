@@ -6,7 +6,9 @@ namespace InstantFishing.Patches
     {
         public static bool PlaySoundPrefix(Card __instance, string id)
         {
-            if (InstantFishingConfig.EnableSounds?.Value == true)
+            bool enableSounds = InstantFishingConfig.EnableSounds?.Value ?? true;
+            
+            if (enableSounds == true)
             {
                 return true;
             }

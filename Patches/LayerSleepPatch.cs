@@ -6,7 +6,9 @@ namespace InstantFishing.Patches
     {
         public static void AdvancePostfix(LayerSleep __instance)
         {
-            if (InstantFishingConfig.EnableAutoFish?.Value == false)
+            bool enableAutoFish = InstantFishingConfig.EnableAutoFish?.Value ?? false;
+            
+            if (enableAutoFish == false)
             {
                 return;
             }

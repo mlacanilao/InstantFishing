@@ -10,7 +10,9 @@ namespace InstantFishing.Patches
 
         public static void OnProgressPrefix(AI_Fish.ProgressFish __instance)
         {
-            if (InstantFishingConfig.EnableInstantFishing?.Value == false)
+            bool enableInstantFishing = InstantFishingConfig.EnableInstantFishing?.Value ?? false;
+            
+            if (enableInstantFishing == false)
             {
                 return;
             }
@@ -40,7 +42,11 @@ namespace InstantFishing.Patches
                 return;
             }
 
-            if (InstantFishingConfig.enableInstantBonitoFlakes?.Value == true)
+            bool enableInstantBonitoFlakes = InstantFishingConfig.EnableInstantBonitoFlakes?.Value ?? false;
+            bool enableItemBlessedState = InstantFishingConfig.EnableItemBlessedState?.Value ?? false;
+            bool enableZeroWeight = InstantFishingConfig.EnableZeroWeight?.Value ?? false;
+
+            if (enableInstantBonitoFlakes == true)
             {
                 var inventory = EClass.pc?.things;
             
@@ -78,12 +84,12 @@ namespace InstantFishing.Patches
 
                     if (craftedItem != null)
                     {
-                        if (InstantFishingConfig.EnableItemBlessedState?.Value == true)
+                        if (enableItemBlessedState == true)
                         {
                             craftedItem?.SetBlessedState(s: InstantFishingConfig.ItemBlessedState?.Value ?? BlessedState.Normal);
                         }
                         
-                        if (InstantFishingConfig.EnableZeroWeight?.Value == true)
+                        if (enableZeroWeight == true)
                         {
                             craftedItem?.ChangeWeight(a: 0);
                         }
@@ -103,8 +109,10 @@ namespace InstantFishing.Patches
                     caughtFish.Destroy();
                 }
             }
+            
+            bool enableInstantWine = InstantFishingConfig.EnableInstantWine?.Value ?? false;
 
-            if (InstantFishingConfig.enableInstantWine?.Value == true)
+            if (enableInstantWine == true)
             {
                 var inventory = EClass.pc.things;
                 if (inventory == null || inventory.Count == 0)
@@ -140,36 +148,39 @@ namespace InstantFishing.Patches
                 
                 foreach (var wine in allWine)
                 {
-                    if (InstantFishingConfig.EnableItemBlessedState?.Value == true)
+                    if (enableItemBlessedState == true)
                     {
                         wine?.SetBlessedState(s: InstantFishingConfig.ItemBlessedState?.Value ?? BlessedState.Normal);
                     }
                     
-                    if (InstantFishingConfig.EnableZeroWeight?.Value == true)
+                    if (enableZeroWeight == true)
                     {
                         wine?.ChangeWeight(a: 0);
                     }
                 }
             }
-
-            if (InstantFishingConfig.EnableAutoEat?.Value == true &&
+            
+            bool enableAutoEat = InstantFishingConfig.EnableAutoEat?.Value ?? false;
+            if (enableAutoEat == true &&
                 __instance.owner?.hunger?.GetPhase() >= InstantFishingConfig.AutoEatThreshold?.Value)
             {
                 __instance.owner?.InstantEat();
             }
             
-            if (InstantFishingConfig.EnableAutoSleep?.Value == true &&
-                __instance.owner?.sleepiness?.GetPhase() >= InstantFishingConfig.AutoSleepThreshold?.Value &&
+            bool enableAutoSleep = InstantFishingConfig.EnableAutoSleep?.Value ?? false;
+            if (enableAutoSleep == true &&
+                __instance.owner?.sleepiness?.GetPhase() >= (InstantFishingConfig.AutoSleepThreshold?.Value ?? 1) &&
                 __instance.owner.CanSleep())
             {
                 HotItemActionSleep actionSleep = new HotItemActionSleep();
                 actionSleep.Perform();
             }
             
-            if (InstantFishingConfig.EnableStaminaThreshold?.Value == true &&
+            bool enableStaminaThreshold = InstantFishingConfig.EnableStaminaThreshold?.Value ?? true;
+            if (enableStaminaThreshold == true &&
                 __instance.owner?.stamina?.value <= (InstantFishingConfig.StaminaThreshold?.Value ?? 0))
             {
-                if (InstantFishingConfig.EnableAutoSleep?.Value == true &&
+                if (enableAutoSleep == true &&
                     __instance.owner.CanSleep())
                 {
                     HotItemActionSleep actionSleep = new HotItemActionSleep();
@@ -185,7 +196,9 @@ namespace InstantFishing.Patches
         
         public static bool RipplePrefix(AI_Fish.ProgressFish __instance)
         {
-            if (InstantFishingConfig.EnableRippleEffect?.Value == true)
+            bool enableRippleEffect = InstantFishingConfig.EnableRippleEffect?.Value ?? true;
+            
+            if (enableRippleEffect == true)
             {
                 return true;
             }
@@ -205,17 +218,20 @@ namespace InstantFishing.Patches
                 return;
             }
             
-            if (InstantFishingConfig.EnableItemMultiplier?.Value == true)
+            bool enableItemMultiplier = InstantFishingConfig.EnableItemMultiplier?.Value ?? false;
+            if (enableItemMultiplier == true)
             {
                 __result?.SetNum(a: __result.Num * (InstantFishingConfig.ItemMultiplier?.Value ?? 1));
             }
 
-            if (InstantFishingConfig.EnableItemBlessedState?.Value == true)
+            bool enableItemBlessedState = InstantFishingConfig.EnableItemBlessedState?.Value ?? false;
+            if (enableItemBlessedState == true)
             {
                 __result?.SetBlessedState(s: InstantFishingConfig.ItemBlessedState?.Value ?? BlessedState.Normal);
             }
 
-            if (InstantFishingConfig.EnableZeroWeight?.Value == true)
+            bool enableZeroWeight = InstantFishingConfig.EnableZeroWeight?.Value ?? false;
+            if (enableZeroWeight == true)
             {
                 __result?.ChangeWeight(a: 0);
             }

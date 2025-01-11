@@ -6,7 +6,9 @@ namespace InstantFishing.Patches
     {
         public static bool IsTopWaterAndNoSnowPrefix(Cell __instance, ref bool __result)
         {
-            if (InstantFishingConfig.EnableWinterFishing?.Value == false)
+            bool enableWinterFishing = InstantFishingConfig.EnableWinterFishing?.Value ?? false;
+            
+            if (enableWinterFishing == false)
             {
                 return true;
             }

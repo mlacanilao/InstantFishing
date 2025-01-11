@@ -33,8 +33,8 @@ namespace InstantFishing.Config
         internal static ConfigEntry<bool> EnableAutoSleep;
         internal static ConfigEntry<int> AutoSleepThreshold;
         internal static ConfigEntry<bool> EnableAutoDump;
-        internal static ConfigEntry<bool> enableInstantBonitoFlakes;
-        internal static ConfigEntry<bool> enableInstantWine;
+        internal static ConfigEntry<bool> EnableInstantBonitoFlakes;
+        internal static ConfigEntry<bool> EnableInstantWine;
         
         // Fish
         internal static ConfigEntry<string> _selectedFishIds;
@@ -318,7 +318,7 @@ namespace InstantFishing.Config
                              "设置为 'true' 自动放置物品，设置为 'false' 禁用此功能。"
             );
             
-            enableInstantBonitoFlakes = config.Bind(
+            EnableInstantBonitoFlakes = config.Bind(
                 section: ModInfo.Name,
                 key: "Enable Instant Bonito Flakes",
                 defaultValue: false,
@@ -330,7 +330,7 @@ namespace InstantFishing.Config
                              "设置为 'true' 可即时将选定鱼类转化为柴鱼片，设置为 'false' 则禁用此功能。"
             );
             
-            enableInstantWine = config.Bind(
+            EnableInstantWine = config.Bind(
                 section: ModInfo.Name,
                 key: "Enable Instant Wine",
                 defaultValue: false,

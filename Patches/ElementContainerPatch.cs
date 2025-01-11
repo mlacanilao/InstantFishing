@@ -6,7 +6,9 @@ namespace InstantFishing.Patches
     {
         public static void ModExpPrefix(ElementContainer __instance, int ele, ref int a)
         {
-            if (InstantFishingConfig.EnableExperienceMultiplier?.Value == false)
+            bool enableExperienceMultiplier = InstantFishingConfig.EnableExperienceMultiplier?.Value ?? false;
+            
+            if (enableExperienceMultiplier == false)
             {
                 return;
             }

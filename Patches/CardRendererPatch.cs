@@ -6,7 +6,9 @@ namespace InstantFishing.Patches
     {
         public static bool PlayAnimePrefix(CardRenderer __instance, AnimeID id)
         {
-            if (InstantFishingConfig.EnableAnimations?.Value == true)
+            bool enableAnimations = InstantFishingConfig.EnableAnimations?.Value ?? true;
+            
+            if (enableAnimations == true)
             {
                 return true;
             }

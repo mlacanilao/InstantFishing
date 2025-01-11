@@ -305,17 +305,17 @@ namespace InstantFishing.UI
                 };
                 
                 var enableInstantBonitoFlakesToggle = builder.GetPreBuild<OptToggle>(id: "enableInstantBonitoFlakesToggle");
-                enableInstantBonitoFlakesToggle.Checked = InstantFishingConfig.enableInstantBonitoFlakes.Value;
+                enableInstantBonitoFlakesToggle.Checked = InstantFishingConfig.EnableInstantBonitoFlakes.Value;
                 enableInstantBonitoFlakesToggle.OnValueChanged += isChecked =>
                 {
-                    InstantFishingConfig.enableInstantBonitoFlakes.Value = isChecked;
+                    InstantFishingConfig.EnableInstantBonitoFlakes.Value = isChecked;
                 };
                 
                 var enableInstantWineToggle = builder.GetPreBuild<OptToggle>(id: "enableInstantWineToggle");
-                enableInstantWineToggle.Checked = InstantFishingConfig.enableInstantWine.Value;
+                enableInstantWineToggle.Checked = InstantFishingConfig.EnableInstantWine.Value;
                 enableInstantWineToggle.OnValueChanged += isChecked =>
                 {
-                    InstantFishingConfig.enableInstantWine.Value = isChecked;
+                    InstantFishingConfig.EnableInstantWine.Value = isChecked;
                 };
                 
                 var enableAutoDumpToggle = builder.GetPreBuild<OptToggle>(id: "enableAutoDumpToggle");
