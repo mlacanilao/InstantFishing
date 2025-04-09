@@ -109,6 +109,7 @@ namespace InstantFishing.UI
                     }
                 }
                 
+                // Cheats
                 var enableInstantFishingToggle = builder.GetPreBuild<OptToggle>(id: "enableInstantFishingToggle");
                 enableInstantFishingToggle.Checked = InstantFishingConfig.EnableInstantFishing.Value;
                 enableInstantFishingToggle.OnValueChanged += isChecked =>
@@ -116,7 +117,13 @@ namespace InstantFishing.UI
                     InstantFishingConfig.EnableInstantFishing.Value = isChecked;
                 };
                 
-                // Cheats
+                var enableInstantReadAncientBook = builder.GetPreBuild<OptToggle>(id: "enableInstantReadAncientBook");
+                enableInstantReadAncientBook.Checked = InstantFishingConfig.EnableInstantReadAncientBook.Value;
+                enableInstantReadAncientBook.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableInstantReadAncientBook.Value = isChecked;
+                };
+                
                 var enableExperienceMultiplierToggle = builder.GetPreBuild<OptToggle>(id: "enableExperienceMultiplierToggle");
                 enableExperienceMultiplierToggle.Checked = InstantFishingConfig.EnableExperienceMultiplier.Value;
                 enableExperienceMultiplierToggle.OnValueChanged += isChecked =>
@@ -207,6 +214,12 @@ namespace InstantFishing.UI
                 enableTurboModeToggle.OnValueChanged += isChecked =>
                 {
                     InstantFishingConfig.EnableTurboMode.Value = isChecked;
+                    
+                    if (EClass.core?.IsGameStarted == true && isChecked == false)
+                    {
+                        ActionMode.Adv.SetTurbo(mtp: -1);
+                        EClass._map?.charas?.ForEach(chara => chara.roundTimer = 0f);
+                    }
                 };
                 
                 var turboModeSlider = builder.GetPreBuild<OptSlider>(id: "turboModeSlider");

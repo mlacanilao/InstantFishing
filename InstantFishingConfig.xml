@@ -12,6 +12,14 @@
                 </toggle>
             </vlayout>
 
+            <vlayout id="vlayout54" border="true">
+                <title>title19</title>
+                <toggle id="enableInstantReadAncientBook">
+                    <contentId>toggle52</contentId>
+                    <tooltip>tooltip18</tooltip>
+                </toggle>
+            </vlayout>
+
             <vlayout id="vlayout03" border="true">
                 <title>title05</title>
                 <toggle id="enableExperienceMultiplierToggle">

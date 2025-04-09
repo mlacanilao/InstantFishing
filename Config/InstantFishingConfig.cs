@@ -10,6 +10,7 @@ namespace InstantFishing.Config
     {
         // Cheats
         internal static ConfigEntry<bool> EnableInstantFishing;
+        internal static ConfigEntry<bool> EnableInstantReadAncientBook;
         internal static ConfigEntry<bool> EnableItemMultiplier;
         internal static ConfigEntry<int> ItemMultiplier;
         internal static ConfigEntry<bool> EnableItemBlessedState;
@@ -65,6 +66,18 @@ namespace InstantFishing.Config
                              "'true' に設定すると有効になり、'false' に設定すると無効になります。\n" +
                              "启用或禁用瞬间钓鱼。\n" +
                              "设置为 'true' 即启用，设置为 'false' 即禁用。");
+            
+            EnableInstantReadAncientBook = config.Bind(
+                section: ModInfo.Name,
+                key: "Enable Instant Read Ancient Book",
+                defaultValue: false,
+                description:
+                "Enable or disable automatic reading of ancient books.\n" +
+                "Set to 'true' to auto-read when an ancient book is found, or 'false' to ignore it.\n" +
+                "古書を自動で読む機能を有効または無効にします。\n" +
+                "'true' に設定すると見つかった古書を自動で読みます。'false' にすると無視します。\n" +
+                "启用或禁用自动阅读古书的功能。\n" +
+                "设置为 'true' 会在发现古书时自动阅读，设置为 'false' 则忽略。");
             
             EnableExperienceMultiplier = config.Bind(
                 section: ModInfo.Name,

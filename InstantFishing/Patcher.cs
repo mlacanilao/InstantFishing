@@ -32,7 +32,7 @@ namespace InstantFishing
         [HarmonyPatch(declaringType: typeof(AI_Fish.ProgressFish), methodName: nameof(AI_Fish.ProgressFish.OnProgressComplete))]
         public static void AI_FishProgressFishOnProgressComplete(AI_Fish.ProgressFish __instance)
         {
-            AI_FishPatch.OnProgressCompletePostifx(__instance: __instance);
+            AI_FishPatch.OnProgressCompletePostfix(__instance: __instance);
         }
         
         [HarmonyPrefix]

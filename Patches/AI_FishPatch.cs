@@ -30,7 +30,7 @@ namespace InstantFishing.Patches
             __instance.hit = 100;
         }
         
-        public static void OnProgressCompletePostifx(AI_Fish.ProgressFish __instance)
+        public static void OnProgressCompletePostfix(AI_Fish.ProgressFish __instance)
         {
             if (__instance is null)
             {
@@ -56,12 +56,10 @@ namespace InstantFishing.Patches
                 }
 
                 var selectedFishIds = InstantFishingConfig.SelectedFishIds;
-            
-                Thing caughtFish = inventory.Find(func: t => 
-                    t.source.name != null &&
-                    t.source._origin == "fish" &&
-                    selectedFishIds.Contains(item: t.id)
-                );
+                
+                Thing caughtFish = null;
+                
+                CheckForFishInThings(inventory, selectedFishIds, ref caughtFish);
             
                 if (caughtFish == null || caughtFish.Num <= 0)
                 {
@@ -114,37 +112,31 @@ namespace InstantFishing.Patches
 
             if (enableInstantWine == true)
             {
-                var inventory = EClass.pc.things;
+                var inventory = EClass.pc?.things;
                 if (inventory == null || inventory.Count == 0)
                 {
                     return;
                 }
                 
-                var allFish = inventory.Where(t =>
-                    t.source.name != null &&
-                    t.source._origin == "fish" ||
-                    t.source.id == "bonito"
-                ).ToList();
+                Thing fishOrBonito = null;
+                Card container = null;
+
+                FindFirstFishOrBonito(inventory, ref fishOrBonito, ref container);
                 
-                foreach (var fish in allFish)
+                if (fishOrBonito != null && fishOrBonito.Num > 0)
                 {
-                    if (fish.Num <= 0)
-                    {
-                        continue;
-                    }
+                    var ownerCard = container ?? EClass.pc;
                     
                     TraitBrewery brewery = new TraitBrewery
                     {
-                        owner = __instance.owner
+                        owner = ownerCard
                     };
 
-                    brewery.OnChildDecay(c: fish, firstDecay: true);
+                    brewery.OnChildDecay(c: fishOrBonito, firstDecay: true);
                 }
                 
-                var allWine = inventory.Where(t =>
-                    t.source.name != null &&
-                    (t.source.name == "wine" || t.source.name == "ワイン")
-                ).ToList();
+                List<Thing> allWine = new List<Thing>();
+                CollectWineItems(inventory, allWine);
                 
                 foreach (var wine in allWine)
                 {
@@ -156,6 +148,41 @@ namespace InstantFishing.Patches
                     if (enableZeroWeight == true)
                     {
                         wine?.ChangeWeight(a: 0);
+                    }
+                }
+            }
+            
+            bool enableInstantReadAncientBook = InstantFishingConfig.EnableInstantReadAncientBook?.Value ?? false;
+            
+            if (enableInstantReadAncientBook == true)
+            {
+                var inventory = EClass.pc?.things;
+                if (inventory == null || inventory.Count == 0)
+                {
+                    return;
+                }
+                
+                Thing ancientBook = null;
+                Thing container = null;
+
+                FindFirstAncientBook(inventory, ref ancientBook, ref container);
+                
+                InstantFishing.Log(payload: $"ancientBook: {ancientBook}");
+
+                if (ancientBook != null && ancientBook?.trait is TraitAncientbook trait && ancientBook.c_charges > 0)
+                {
+                    InstantFishing.Log(payload: $"ancientBook.isOn: {ancientBook.isOn}");
+                    InstantFishing.Log(payload: $"ancientBook.c_charges: {ancientBook.c_charges}");
+                    
+                    for (int i = 0; i < ancientBook.c_charges; i++)
+                    {
+                        if (EClass.pc.isDead)
+                            break;
+
+                        int duration = trait.GetActDuration(EClass.pc) + 1;
+                        InstantFishing.Log(payload: $"duration: {duration}");
+                        
+                        trait.OnRead(EClass.pc);
                     }
                 }
             }
@@ -236,5 +263,100 @@ namespace InstantFishing.Patches
                 __result?.ChangeWeight(a: 0);
             }
         }
+
+        private static void CheckForFishInThings(List<Thing> things, List<string> selectedFishIds, ref Thing caughtFish)
+        {
+            if (things == null || things.Count == 0 || caughtFish != null)
+                return;
+
+            foreach (var thing in things)
+            {
+                if (thing.source?.name != null &&
+                    thing.source._origin == "fish" &&
+                    selectedFishIds.Contains(thing.id))
+                {
+                    caughtFish = thing;
+                    return;
+                }
+
+                if (thing.things != null && thing.things.Count > 0)
+                {
+                    CheckForFishInThings(thing.things, selectedFishIds, ref caughtFish);
+
+                    if (caughtFish != null)
+                        return;
+                }
+            }
+        }
+        
+        private static void FindFirstFishOrBonito(List<Thing> things, ref Thing result, ref Card container, Thing parent = null)
+        {
+            if (things == null || things.Count == 0 || result != null)
+                return;
+
+            foreach (var thing in things)
+            {
+                if ((thing.source?.name != null && thing.source._origin == "fish") ||
+                    thing.source?.id == "bonito")
+                {
+                    result = thing;
+                    container = parent;
+                    return;
+                }
+
+                if (thing.things != null && thing.things.Count > 0)
+                {
+                    FindFirstFishOrBonito(thing.things, ref result, ref container, parent: thing);
+
+                    if (result != null)
+                        return;
+                }
+            }
+        }
+
+        
+        private static void CollectWineItems(List<Thing> things, List<Thing> matches)
+        {
+            if (things == null || things.Count == 0)
+                return;
+
+            foreach (var thing in things)
+            {
+                if (thing.source?.name == "wine" || thing.source?.name == "ワイン")
+                {
+                    matches.Add(thing);
+                }
+
+                if (thing.things != null && thing.things.Count > 0)
+                {
+                    CollectWineItems(thing.things, matches);
+                }
+            }
+        }
+        
+        private static void FindFirstAncientBook(List<Thing> things, ref Thing result, ref Thing container, Thing parent = null)
+        {
+            if (things == null || things.Count == 0 || result != null)
+                return;
+
+            foreach (var thing in things)
+            {
+                if (thing.trait is TraitAncientbook && thing.isOn == false)
+                {
+                    result = thing;
+                    container = parent;
+                    return;
+                }
+
+                if (thing.things != null && thing.things.Count > 0)
+                {
+                    FindFirstAncientBook(thing.things, ref result, ref container, parent: thing);
+
+                    if (result != null)
+                        return;
+                }
+            }
+        }
+
     }
 }
