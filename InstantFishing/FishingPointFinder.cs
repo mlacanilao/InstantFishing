@@ -1,77 +1,67 @@
+using System;
+
 namespace InstantFishing
 {
     public class FishingPointFinder
     {
         public static void FindAndSetNearestFishingPoint()
         {
-            Point nearestValidPoint = null;
-            int shortestDistance = int.MaxValue;
+            Point newFishingPoint = null;
+            Point origin = EClass.pc.pos;
 
-            // Iterate over all points in map bounds
-            ELayer._map.bounds.ForeachPoint(action: delegate(Point point)
+            int maxRadius = 20; // Optional: limit for performance
+
+            for (int r = 1; r <= maxRadius; r++)
             {
-                // InstantFishing.Log($"Checking point: {point}");
-
-                // Check if the point is valid for fishing
-                if (!point.IsInBounds)
+                for (int x = origin.x - r; x <= origin.x + r; x++)
                 {
-                    // InstantFishing.Log($"Point {point} is out of bounds. Skipping.");
-                    return; // Skip invalid points
+                    for (int z = origin.z - r; z <= origin.z + r; z++)
+                    {
+                        // Skip inner area to only hit the current radius ring
+                        if (Math.Abs(x - origin.x) != r && Math.Abs(z - origin.z) != r)
+                            continue;
+
+                        Point checkPoint = new Point();
+                        checkPoint.Set(_x: x, _z: z);
+
+                        if (!checkPoint.IsInBounds)
+                            continue;
+
+                        if (!checkPoint.cell.IsTopWaterAndNoSnow)
+                            continue;
+
+                        newFishingPoint = checkPoint;
+                        break;
+                    }
+
+                    if (newFishingPoint != null) break;
                 }
 
-                if (!point.cell.IsTopWaterAndNoSnow)
-                {
-                    // InstantFishing.Log($"Point {point} is not top water or has snow. Skipping.");
-                    return; // Skip points not suitable for fishing
-                }
+                if (newFishingPoint != null) break;
+            }
 
-                // Calculate the distance from the player's position to this point
-                int distance = EClass.pc.pos.Distance(p: point);
-                // InstantFishing.Log($"Distance to point {point}: {distance}");
-
-                // Check if this is the nearest valid point so far
-                if (distance < shortestDistance)
-                {
-                    shortestDistance = distance;
-                    nearestValidPoint = point.Copy(); // Store the nearest point
-                    InstantFishing.Log(payload: $"New nearest point found: {point}");
-                }
-            });
-
-            if (nearestValidPoint != null)
+            if (newFishingPoint != null)
             {
-                // InstantFishing.Log($"Nearest valid point found: {nearestValidPoint} with distance: {shortestDistance}");
-
-                // Create an ActPlan for the nearest valid point
-                ActPlan actPlan = new ActPlan();
-                actPlan.pos = nearestValidPoint.Copy();
-                // InstantFishing.Log($"Created ActPlan for nearest point: {nearestValidPoint}");
-
-                // Try to set the act for the nearest point
-                if (EClass.player.currentHotItem?.TrySetAct(p: actPlan) == true)
+                ActPlan actPlan = new ActPlan
                 {
-                    // InstantFishing.Log($"Successfully set tool act for nearest point: {nearestValidPoint}");
+                    pos = newFishingPoint.Copy(),
+                    input = ActInput.RightMouse
+                };
 
-                    // Simulate right-click on the nearest point
-                    actPlan.input = ActInput.RightMouse; // Set input type to right-click
-                    actPlan._Update(target: new PointTarget { pos = nearestValidPoint.Copy() });
-                    // InstantFishing.Log($"Simulated right-click on nearest point: {nearestValidPoint}");
+                if (EClass.player.currentHotItem?.TrySetAct(actPlan) == true)
+                {
+                    actPlan._Update(new PointTarget { pos = newFishingPoint.Copy() });
 
-                    // Execute the action
                     var action = actPlan.GetAction();
                     if (action != null && action())
                     {
-                        // InstantFishing.Log($"Action executed successfully for nearest point: {nearestValidPoint}");
-                    }
-                    else
-                    {
-                        // InstantFishing.Log($"Action execution failed for nearest point: {nearestValidPoint}");
+                        InstantFishing.Log("Successfully set fishing action.");
                     }
                 }
             }
             else
             {
-                InstantFishing.Log(payload: $"No valid fishing point found.");
+                InstantFishing.Log("No valid fishing point found within radius.");
             }
         }
     }

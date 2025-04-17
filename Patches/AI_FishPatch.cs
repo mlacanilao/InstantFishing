@@ -167,20 +167,12 @@ namespace InstantFishing.Patches
 
                 FindFirstAncientBook(inventory, ref ancientBook, ref container);
                 
-                InstantFishing.Log(payload: $"ancientBook: {ancientBook}");
-
                 if (ancientBook != null && ancientBook?.trait is TraitAncientbook trait && ancientBook.c_charges > 0)
                 {
-                    InstantFishing.Log(payload: $"ancientBook.isOn: {ancientBook.isOn}");
-                    InstantFishing.Log(payload: $"ancientBook.c_charges: {ancientBook.c_charges}");
-                    
                     for (int i = 0; i < ancientBook.c_charges; i++)
                     {
                         if (EClass.pc.isDead)
                             break;
-
-                        int duration = trait.GetActDuration(EClass.pc) + 1;
-                        InstantFishing.Log(payload: $"duration: {duration}");
                         
                         trait.OnRead(EClass.pc);
                     }
