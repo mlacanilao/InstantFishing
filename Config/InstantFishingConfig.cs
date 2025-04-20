@@ -35,6 +35,7 @@ namespace InstantFishing.Config
         internal static ConfigEntry<int> AutoSleepThreshold;
         internal static ConfigEntry<bool> EnableAutoDump;
         internal static ConfigEntry<bool> EnableInstantBonitoFlakes;
+        internal static ConfigEntry<bool> EnableExcludeTierFishFromBonito;
         internal static ConfigEntry<bool> EnableInstantWine;
         
         // Fish
@@ -337,10 +338,22 @@ namespace InstantFishing.Config
                 defaultValue: false,
                 description: "Enable or disable instantly turning selected fish into bonito flakes.\n" +
                              "Set to 'true' to instantly convert selected fish into bonito flakes, or 'false' to disable the feature.\n" +
-                             "選択した魚を即座にかつお節に変換する機能を有効または無効にします。\n" +
-                             "'true' に設定すると選択した魚を即座にかつお節に変換し、'false' に設定すると無効になります。\n" +
+                             "選択した魚をかつおぶしに即座に変換する機能を有効または無効にします。\n" +
+                             "'true' に設定すると、選択した魚を即座にかつおぶしに変換します。\n" +
                              "启用或禁用将选定鱼类即时转化为柴鱼片。\n" +
                              "设置为 'true' 可即时将选定鱼类转化为柴鱼片，设置为 'false' 则禁用此功能。"
+            );
+            
+            EnableExcludeTierFishFromBonito = config.Bind(
+                section: ModInfo.Name,
+                key: "Enable Exclude Tier Fish From Bonito Flakes",
+                defaultValue: false,
+                description: "Enable or disable excluding star-tier (★) fish from the bonito flakes feature.\n" +
+                             "Set to 'true' to skip converting rare fish marked with a star.\n" +
+                             "星付き（★）のレア魚をかつおぶし変換機能の対象から除外するかどうかを設定します。\n" +
+                             "'true' に設定すると、★付きの魚は変換されません。\n" +
+                             "启用或禁用将带有星标（★）的稀有鱼类排除在柴鱼片转换功能之外。\n" +
+                             "设置为 'true' 可跳过转换带星的稀有鱼类。"
             );
             
             EnableInstantWine = config.Bind(

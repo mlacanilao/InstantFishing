@@ -260,12 +260,15 @@ namespace InstantFishing.Patches
         {
             if (things == null || things.Count == 0 || caughtFish != null)
                 return;
+            
+            bool excludeTierFish = InstantFishingConfig.EnableExcludeTierFishFromBonito?.Value ?? false;
 
             foreach (var thing in things)
             {
                 if (thing.source?.name != null &&
                     thing.source._origin == "fish" &&
                     thing.id != "fish_slice" &&
+                    (excludeTierFish == false || thing.tier == 0) &&
                     selectedFishIds.Contains(thing.id))
                 {
                     caughtFish = thing;
@@ -309,7 +312,6 @@ namespace InstantFishing.Patches
                 }
             }
         }
-
         
         private static void CollectWineItems(List<Thing> things, List<Thing> matches)
         {

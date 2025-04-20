@@ -236,6 +236,11 @@
                         <contentId>toggle16</contentId>
                         <tooltip>tooltip16</tooltip>
                     </toggle>
+
+                    <toggle id="enableExcludeTierFishFromBonitoToggle">
+                        <contentId>toggle53</contentId>
+                        <tooltip>tooltip19</tooltip>
+                    </toggle>
                 </vlayout>
                 
                 <vlayout id="vlayout18" border="true">

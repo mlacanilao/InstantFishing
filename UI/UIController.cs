@@ -324,6 +324,13 @@ namespace InstantFishing.UI
                     InstantFishingConfig.EnableInstantBonitoFlakes.Value = isChecked;
                 };
                 
+                var enableExcludeTierFishFromBonitoToggle = builder.GetPreBuild<OptToggle>(id: "enableExcludeTierFishFromBonitoToggle");
+                enableExcludeTierFishFromBonitoToggle.Checked = InstantFishingConfig.EnableExcludeTierFishFromBonito.Value;
+                enableExcludeTierFishFromBonitoToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableExcludeTierFishFromBonito.Value = isChecked;
+                };
+                
                 var enableInstantWineToggle = builder.GetPreBuild<OptToggle>(id: "enableInstantWineToggle");
                 enableInstantWineToggle.Checked = InstantFishingConfig.EnableInstantWine.Value;
                 enableInstantWineToggle.OnValueChanged += isChecked =>
