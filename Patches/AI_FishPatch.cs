@@ -265,6 +265,7 @@ namespace InstantFishing.Patches
             {
                 if (thing.source?.name != null &&
                     thing.source._origin == "fish" &&
+                    thing.id != "fish_slice" &&
                     selectedFishIds.Contains(thing.id))
                 {
                     caughtFish = thing;
@@ -288,8 +289,11 @@ namespace InstantFishing.Patches
 
             foreach (var thing in things)
             {
-                if ((thing.source?.name != null && thing.source._origin == "fish") ||
-                    thing.source?.id == "bonito")
+                if (
+                    ((thing.source?.name != null && thing.source._origin == "fish") || 
+                     thing.source?.id == "bonito") &&
+                    thing.id != "fish_slice"
+                )
                 {
                     result = thing;
                     container = parent;
