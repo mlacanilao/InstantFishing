@@ -1,4 +1,3 @@
-using System;
 using InstantFishing.Config;
 
 namespace InstantFishing.Patches

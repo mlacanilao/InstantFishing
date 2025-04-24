@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using InstantFishing.Config;
-using UnityEngine;
 
 namespace InstantFishing.Patches
 {
@@ -253,6 +251,17 @@ namespace InstantFishing.Patches
             if (enableZeroWeight == true)
             {
                 __result?.ChangeWeight(a: 0);
+            }
+            
+            bool enableSetTier = InstantFishingConfig.EnableSetTier?.Value ?? false;
+            int tierToSet = InstantFishingConfig.SetTier?.Value ?? 0;
+            if (enableSetTier == true)
+            {
+                if (__result?.source._origin == "fish" &&
+                    __result?.id != "fish_slice")
+                {
+                    __result?.SetTier(a: tierToSet, setTraits: true);
+                }
             }
         }
 

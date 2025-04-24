@@ -18,6 +18,8 @@ namespace InstantFishing.Config
         internal static ConfigEntry<bool> EnableExperienceMultiplier;
         internal static ConfigEntry<int> ExperienceMultiplier;
         internal static ConfigEntry<bool> EnableZeroWeight;
+        internal static ConfigEntry<bool> EnableSetTier;
+        internal static ConfigEntry<int> SetTier;
         
         // QoL
         internal static ConfigEntry<bool> EnableAutoFish;
@@ -129,6 +131,30 @@ namespace InstantFishing.Config
                              "设置钓鱼时获得物品数量的倍增器。\n" +
                              "值越高，捕获的物品数量越多。\n" +
                              "必须为整数值（例如，2 表示物品数量翻倍）。"
+            );
+            
+            EnableSetTier = config.Bind(
+                section: ModInfo.Name,
+                key: "Enable Set Tier",
+                defaultValue: false,
+                description: "Enable or disable setting a custom tier level (★) for caught fish.\n" +
+                             "Set to 'true' to override fish with a custom tier level (★).\n" +
+                             "釣った魚にカスタムティア（★）を設定する機能を有効または無効にします。\n" +
+                             "'true' に設定すると、魚のティア（★）を上書きします。\n" +
+                             "启用或禁用为钓到的鱼设置自定义星级（★）。\n" +
+                             "设置为 'true' 将覆盖鱼的原有星级（★）。"
+            );
+            
+            SetTier = config.Bind(
+                section: ModInfo.Name,
+                key: "Set Tier",
+                defaultValue: 0,
+                description: "Set the tier level to apply to caught fish.\n" +
+                             "0 = None, 1 = ★, 2 = ★★, 3 = ★★★, etc.\n" +
+                             "釣った魚に適用するティアレベルを設定します。\n" +
+                             "0 = なし、1 = ★、2 = ★★、3 = ★★★ など。\n" +
+                             "设置钓到的鱼的星级。\n" +
+                             "0 = 无，1 = ★，2 = ★★，3 = ★★★ 等。"
             );
             
             EnableItemBlessedState = config.Bind(

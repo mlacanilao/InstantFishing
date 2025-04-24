@@ -53,6 +53,28 @@
                 <slider id="itemSlider" min="1" max="10" buttons="true"></slider>
             </vlayout>
 
+            <vlayout id="vlayout54" border="true">
+                <title>title20</title>
+                <toggle id="enableSetTierToggle">
+                    <contentId>toggle54</contentId>
+                    <tooltip>tooltip20</tooltip>
+                </toggle>
+                <one_choice id="setTierDropdown" type="dropdown">
+                    <choice>
+                        <contentId>0</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>1</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>2</contentId>
+                    </choice>
+                    <choice>
+                        <contentId>3</contentId>
+                    </choice>
+                </one_choice>
+            </vlayout>
+
             <vlayout id="vlayout05" border="true">
                 <title>title04</title>
                 <toggle id="enableItemBlessedStateToggle">

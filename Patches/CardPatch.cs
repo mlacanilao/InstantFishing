@@ -30,5 +30,24 @@ namespace InstantFishing.Patches
             
             return false;
         }
+        
+        public static bool SetTierPrefix(Card __instance)
+        {
+            bool enableSetTier = InstantFishingConfig.EnableSetTier?.Value ?? false;
+
+            if (enableSetTier == false)
+            {
+                return true;
+            }
+            
+            if (__instance?.sourceCard?._origin == "fish" &&
+                __instance?.id != "fish_slice" &&
+                __instance?.tier != 0)
+            {
+                return false;
+            }
+            
+            return true;
+        }
     }
 }

@@ -28,6 +28,7 @@
     [*]Item multipliers.
     [*]Apply blessed states (Normal, Cursed, Doomed, or Blessed).
     [*]Set item weights to zero.
+    [*]Set tier level (★) for caught fish.
     [*]Instantly convert fish items into bonito flakes.
     [*]Instantly convert fish items into wine.
     [/list]
@@ -66,7 +67,7 @@
     [*]釣りアイテムの倍率設定。
     [*]捕まえたアイテムに祝福状態を適用（通常、呪われた、厄運、祝福）。
     [*]捕まえたアイテムの重量をゼロに設定。
-    [*]釣りアクションの経験値倍率。
+    [*]釣った魚にティアレベル（★）を設定する機能。
     [*]魚アイテムを即座にかつお節に変換。
     [*]魚アイテムを即座にワインに変換。
     [/list]

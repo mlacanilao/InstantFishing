@@ -164,6 +164,20 @@ namespace InstantFishing.UI
                     InstantFishingConfig.ItemMultiplier.Value = (int)value;
                 };
                 
+                var enableSetTierToggle = builder.GetPreBuild<OptToggle>(id: "enableSetTierToggle");
+                enableSetTierToggle.Checked = InstantFishingConfig.EnableSetTier.Value;
+                enableSetTierToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableSetTier.Value = isChecked;
+                };
+                
+                var setTierDropdown = builder.GetPreBuild<OptDropdown>(id: "setTierDropdown");
+                setTierDropdown.Value = InstantFishingConfig.SetTier.Value;
+                setTierDropdown.OnValueChanged += index =>
+                {
+                    InstantFishingConfig.SetTier.Value = index;
+                };
+                
                 var enableItemBlessedStateToggle = builder.GetPreBuild<OptToggle>(id: "enableItemBlessedStateToggle");
                 enableItemBlessedStateToggle.Checked = InstantFishingConfig.EnableItemBlessedState.Value;
                 enableItemBlessedStateToggle.OnValueChanged += isChecked =>
