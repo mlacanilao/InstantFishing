@@ -18,7 +18,7 @@ namespace InstantFishing
                     for (int z = origin.z - r; z <= origin.z + r; z++)
                     {
                         // Skip inner area to only hit the current radius ring
-                        if (Math.Abs(x - origin.x) != r && Math.Abs(z - origin.z) != r)
+                        if (Math.Abs(value: x - origin.x) != r && Math.Abs(value: z - origin.z) != r)
                             continue;
 
                         Point checkPoint = new Point();
@@ -48,20 +48,20 @@ namespace InstantFishing
                     input = ActInput.RightMouse
                 };
 
-                if (EClass.player.currentHotItem?.TrySetAct(actPlan) == true)
+                if (EClass.player.currentHotItem?.TrySetAct(p: actPlan) == true)
                 {
-                    actPlan._Update(new PointTarget { pos = newFishingPoint.Copy() });
+                    actPlan._Update(target: new PointTarget { pos = newFishingPoint.Copy() });
 
                     var action = actPlan.GetAction();
                     if (action != null && action())
                     {
-                        InstantFishing.Log("Successfully set fishing action.");
+                        InstantFishing.Log(payload: "Successfully set fishing action.");
                     }
                 }
             }
             else
             {
-                InstantFishing.Log("No valid fishing point found within radius.");
+                InstantFishing.Log(payload: "No valid fishing point found within radius.");
             }
         }
     }

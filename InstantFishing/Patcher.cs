@@ -51,7 +51,7 @@ namespace InstantFishing
         
         [HarmonyPrefix]
         [HarmonyPatch(declaringType: typeof(ElementContainer), methodName: nameof(ElementContainer.ModExp))]
-        public static void ElementContainerModExp(ElementContainer __instance, int ele, ref int a)
+        public static void ElementContainerModExp(ElementContainer __instance, int ele, ref float a)
         {
             ElementContainerPatch.ModExpPrefix(__instance: __instance, ele: ele, a: ref a);
         }

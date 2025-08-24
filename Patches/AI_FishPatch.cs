@@ -57,7 +57,7 @@ namespace InstantFishing.Patches
                 
                 Thing caughtFish = null;
                 
-                CheckForFishInThings(inventory, selectedFishIds, ref caughtFish);
+                CheckForFishInThings(things: inventory, selectedFishIds: selectedFishIds, caughtFish: ref caughtFish);
             
                 if (caughtFish == null || caughtFish.Num <= 0)
                 {
@@ -119,7 +119,7 @@ namespace InstantFishing.Patches
                 Thing fishOrBonito = null;
                 Card container = null;
 
-                FindFirstFishOrBonito(inventory, ref fishOrBonito, ref container);
+                FindFirstFishOrBonito(things: inventory, result: ref fishOrBonito, container: ref container);
                 
                 if (fishOrBonito != null && fishOrBonito.Num > 0)
                 {
@@ -134,7 +134,7 @@ namespace InstantFishing.Patches
                 }
                 
                 List<Thing> allWine = new List<Thing>();
-                CollectWineItems(inventory, allWine);
+                CollectWineItems(things: inventory, matches: allWine);
                 
                 foreach (var wine in allWine)
                 {
@@ -163,7 +163,7 @@ namespace InstantFishing.Patches
                 Thing ancientBook = null;
                 Thing container = null;
 
-                FindFirstAncientBook(inventory, ref ancientBook, ref container);
+                FindFirstAncientBook(things: inventory, result: ref ancientBook, container: ref container);
                 
                 if (ancientBook != null && ancientBook?.trait is TraitAncientbook trait && ancientBook.c_charges > 0)
                 {
@@ -172,7 +172,7 @@ namespace InstantFishing.Patches
                         if (EClass.pc.isDead)
                             break;
                         
-                        trait.OnRead(EClass.pc);
+                        trait.OnRead(c: EClass.pc);
                     }
                 }
             }
@@ -278,7 +278,7 @@ namespace InstantFishing.Patches
                     thing.source._origin == "fish" &&
                     thing.id != "fish_slice" &&
                     (excludeTierFish == false || thing.tier == 0) &&
-                    selectedFishIds.Contains(thing.id))
+                    selectedFishIds.Contains(item: thing.id))
                 {
                     caughtFish = thing;
                     return;
@@ -286,7 +286,7 @@ namespace InstantFishing.Patches
 
                 if (thing.things != null && thing.things.Count > 0)
                 {
-                    CheckForFishInThings(thing.things, selectedFishIds, ref caughtFish);
+                    CheckForFishInThings(things: thing.things, selectedFishIds: selectedFishIds, caughtFish: ref caughtFish);
 
                     if (caughtFish != null)
                         return;
@@ -314,7 +314,7 @@ namespace InstantFishing.Patches
 
                 if (thing.things != null && thing.things.Count > 0)
                 {
-                    FindFirstFishOrBonito(thing.things, ref result, ref container, parent: thing);
+                    FindFirstFishOrBonito(things: thing.things, result: ref result, container: ref container, parent: thing);
 
                     if (result != null)
                         return;
@@ -331,12 +331,12 @@ namespace InstantFishing.Patches
             {
                 if (thing.source?.name == "wine" || thing.source?.name == "ワイン")
                 {
-                    matches.Add(thing);
+                    matches.Add(item: thing);
                 }
 
                 if (thing.things != null && thing.things.Count > 0)
                 {
-                    CollectWineItems(thing.things, matches);
+                    CollectWineItems(things: thing.things, matches: matches);
                 }
             }
         }
@@ -357,7 +357,7 @@ namespace InstantFishing.Patches
 
                 if (thing.things != null && thing.things.Count > 0)
                 {
-                    FindFirstAncientBook(thing.things, ref result, ref container, parent: thing);
+                    FindFirstAncientBook(things: thing.things, result: ref result, container: ref container, parent: thing);
 
                     if (result != null)
                         return;

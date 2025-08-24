@@ -46,7 +46,7 @@
     If needed, users can also edit the configuration file directly:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    Supports Game Version: 0.23.129
+    Supports Game Version: EA 23.187 Stable
 
     [h1] 快適さの向上 [/h1]
     [list]
@@ -85,8 +85,8 @@
     必要に応じて、上級ユーザーは設定ファイルを直接編集することも可能です:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    対応ゲームバージョン: 0.23.129
+    対応ゲームバージョン: EA 23.187 Stable
   </description>
   <tags>QoL, Cheat</tags>
-  <version>0.23.129</version>
+  <version>0.23.187</version>
 </Meta>

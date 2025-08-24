@@ -232,7 +232,7 @@ namespace InstantFishing.UI
                     if (EClass.core?.IsGameStarted == true && isChecked == false)
                     {
                         ActionMode.Adv.SetTurbo(mtp: -1);
-                        EClass._map?.charas?.ForEach(chara => chara.roundTimer = 0f);
+                        EClass._map?.charas?.ForEach(action: chara => chara.roundTimer = 0f);
                     }
                 };
                 
@@ -372,15 +372,15 @@ namespace InstantFishing.UI
                     {
                         if (isChecked)
                         {
-                            if (!selectedFishIds.Contains(fishId))
-                                selectedFishIds.Add(fishId);
+                            if (!selectedFishIds.Contains(item: fishId))
+                                selectedFishIds.Add(item: fishId);
                         }
                         else
                         {
-                            selectedFishIds.Remove(fishId);
+                            selectedFishIds.Remove(item: fishId);
                         }
 
-                        InstantFishingConfig.UpdateSelectedFishIds(selectedFishIds);
+                        InstantFishingConfig.UpdateSelectedFishIds(selectedFishIdsList: selectedFishIds);
                     };
                 }
                 

@@ -4,7 +4,7 @@ namespace InstantFishing.Patches
 {
     public class ElementContainerPatch
     {
-        public static void ModExpPrefix(ElementContainer __instance, int ele, ref int a)
+        public static void ModExpPrefix(ElementContainer __instance, int ele, ref float a)
         {
             bool enableExperienceMultiplier = InstantFishingConfig.EnableExperienceMultiplier?.Value ?? false;
             
