@@ -90,5 +90,12 @@ namespace InstantFishing
         {
             LayerSleepPatch.AdvancePostfix(__instance: __instance);
         }
+        
+        [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(StatsStamina), methodName: nameof(StatsStamina.Mod))]
+        public static bool StatsStaminaMod()
+        {
+            return StatsStaminaPatch.ModPrefix();
+        }
     }
 }

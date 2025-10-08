@@ -117,11 +117,18 @@ namespace InstantFishing.UI
                     InstantFishingConfig.EnableInstantFishing.Value = isChecked;
                 };
                 
-                var enableInstantReadAncientBook = builder.GetPreBuild<OptToggle>(id: "enableInstantReadAncientBook");
-                enableInstantReadAncientBook.Checked = InstantFishingConfig.EnableInstantReadAncientBook.Value;
-                enableInstantReadAncientBook.OnValueChanged += isChecked =>
+                var enableInstantReadAncientBookToggle = builder.GetPreBuild<OptToggle>(id: "enableInstantReadAncientBookToggle");
+                enableInstantReadAncientBookToggle.Checked = InstantFishingConfig.EnableInstantReadAncientBook.Value;
+                enableInstantReadAncientBookToggle.OnValueChanged += isChecked =>
                 {
                     InstantFishingConfig.EnableInstantReadAncientBook.Value = isChecked;
+                };
+                
+                var enableNoStaminaCostToggle = builder.GetPreBuild<OptToggle>(id: "enableNoStaminaCostToggle");
+                enableNoStaminaCostToggle.Checked = InstantFishingConfig.EnableNoStaminaCost.Value;
+                enableNoStaminaCostToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableNoStaminaCost.Value = isChecked;
                 };
                 
                 var enableExperienceMultiplierToggle = builder.GetPreBuild<OptToggle>(id: "enableExperienceMultiplierToggle");

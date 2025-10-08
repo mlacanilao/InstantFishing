@@ -39,6 +39,7 @@ namespace InstantFishing.Config
         internal static ConfigEntry<bool> EnableInstantBonitoFlakes;
         internal static ConfigEntry<bool> EnableExcludeTierFishFromBonito;
         internal static ConfigEntry<bool> EnableInstantWine;
+        internal static ConfigEntry<bool> EnableNoStaminaCost;
         
         // Fish
         internal static ConfigEntry<string> _selectedFishIds;
@@ -419,6 +420,19 @@ namespace InstantFishing.Config
                              "月鱼 (95)、泥鳅 (68)、红鲷鱼 (79)、三文鱼 (87)、沙钻鱼 (88)、沙丁鱼 (85)、竹荚鱼 (72)、\n" +
                              "真鲷 (86)、海胆 (70)、鲨鱼 (93)、条纹鰺 (76)、翻车鱼 (94)、香鱼 (75)、蝌蚪 (63)、\n" +
                              "瓦鱼 (71)、金枪鱼 1 (73)、金枪鱼 2 (82)、海龟 (80)、鲸鱼 (89)。"
+            );
+            
+            EnableNoStaminaCost = config.Bind(
+                section: ModInfo.Name,
+                key: "Enable No Stamina Cost",
+                defaultValue: false,
+                description:
+                "Enable or disable no stamina cost while fishing.\n" +
+                "Set to 'true' to prevent stamina being consumed during fishing, or 'false' to use normal stamina costs.\n" +
+                "釣り中のスタミナ消費なしを有効または無効にします。\n" +
+                "「true」に設定すると釣り中にスタミナを消費しません。「false」に設定すると通常どおりスタミナを消費します。\n" +
+                "启用或禁用钓鱼时不消耗体力。\n" +
+                "设置为 'true' 时钓鱼不消耗体力，设置为 'false' 时按正常规则消耗体力。"
             );
         }
         

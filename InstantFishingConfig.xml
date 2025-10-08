@@ -14,9 +14,17 @@
 
             <vlayout id="vlayout54" border="true">
                 <title>title19</title>
-                <toggle id="enableInstantReadAncientBook">
+                <toggle id="enableInstantReadAncientBookToggle">
                     <contentId>toggle52</contentId>
                     <tooltip>tooltip18</tooltip>
+                </toggle>
+            </vlayout>
+
+            <vlayout id="vlayout56" border="true">
+                <title>title21</title>
+                <toggle id="enableNoStaminaCostToggle">
+                    <contentId>toggle55</contentId>
+                    <tooltip>tooltip21</tooltip>
                 </toggle>
             </vlayout>
 
@@ -53,7 +61,7 @@
                 <slider id="itemSlider" min="1" max="10" buttons="true"></slider>
             </vlayout>
 
-            <vlayout id="vlayout54" border="true">
+            <vlayout id="vlayout55" border="true">
                 <title>title20</title>
                 <toggle id="enableSetTierToggle">
                     <contentId>toggle54</contentId>
