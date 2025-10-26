@@ -78,6 +78,13 @@ namespace InstantFishing
         }
         
         [HarmonyPrefix]
+        [HarmonyPatch(declaringType: typeof(Card), methodName: nameof(Card.ModNum))]
+        public static bool CardModNum(Card __instance, int a)
+        {
+            return CardPatch.ModNumPrefix(__instance: __instance, a: a);
+        }
+        
+        [HarmonyPrefix]
         [HarmonyPatch(declaringType: typeof(Cell), methodName: nameof(Cell.IsTopWaterAndNoSnow), methodType: MethodType.Getter)]
         public static bool CellIsTopWaterAndNoSnow(Cell __instance, ref bool __result)
         {

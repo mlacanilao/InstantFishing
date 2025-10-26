@@ -131,6 +131,13 @@ namespace InstantFishing.UI
                     InstantFishingConfig.EnableNoStaminaCost.Value = isChecked;
                 };
                 
+                var enableNoBaitConsumptionToggle = builder.GetPreBuild<OptToggle>(id: "enableNoBaitConsumptionToggle");
+                enableNoBaitConsumptionToggle.Checked = InstantFishingConfig.EnableNoBaitConsumption.Value;
+                enableNoBaitConsumptionToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableNoBaitConsumption.Value = isChecked;
+                };
+                
                 var enableExperienceMultiplierToggle = builder.GetPreBuild<OptToggle>(id: "enableExperienceMultiplierToggle");
                 enableExperienceMultiplierToggle.Checked = InstantFishingConfig.EnableExperienceMultiplier.Value;
                 enableExperienceMultiplierToggle.OnValueChanged += isChecked =>

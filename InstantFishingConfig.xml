@@ -28,6 +28,14 @@
                 </toggle>
             </vlayout>
 
+            <vlayout id="vlayout57" border="true">
+                <title>title22</title>
+                <toggle id="enableNoBaitConsumptionToggle">
+                    <contentId>toggle56</contentId>
+                    <tooltip>tooltip22</tooltip>
+                </toggle>
+            </vlayout>
+
             <vlayout id="vlayout03" border="true">
                 <title>title05</title>
                 <toggle id="enableExperienceMultiplierToggle">

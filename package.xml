@@ -25,6 +25,7 @@
     [*]Instantly catch fish.
     [*]Instantly read ancient books.
     [*]No stamina cost while fishing.
+    [*]No bait consumption while fishing.
     [*]Experience multiplier.
     [*]Item multipliers.
     [*]Apply blessed states (Normal, Cursed, Doomed, or Blessed).
@@ -47,7 +48,7 @@
     If needed, users can also edit the configuration file directly:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    Supports Game Version: EA 23.213 Stable
+    Supports Game Version: EA 23.222 Stable
 
     [h1] 快適さの向上 [/h1]
     [list]
@@ -66,6 +67,7 @@
     [*]MODを使用して瞬時に魚を釣り上げる機能。
     [*]古文書を即座に読む機能。
     [*]釣り中のスタミナ消費なし。
+    [*]釣り中の餌消費なし。
     [*]釣りアイテムの倍率設定。
     [*]捕まえたアイテムに祝福状態を適用（通常、呪われた、厄運、祝福）。
     [*]捕まえたアイテムの重量をゼロに設定。
@@ -87,8 +89,8 @@
     必要に応じて、上級ユーザーは設定ファイルを直接編集することも可能です:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    対応ゲームバージョン: EA 23.213 Stable
+    対応ゲームバージョン: EA 23.222 Stable
   </description>
   <tags>QoL, Cheat</tags>
-  <version>0.23.213</version>
+  <version>0.23.222</version>
 </Meta>

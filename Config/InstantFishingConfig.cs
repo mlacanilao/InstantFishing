@@ -20,6 +20,7 @@ namespace InstantFishing.Config
         internal static ConfigEntry<bool> EnableZeroWeight;
         internal static ConfigEntry<bool> EnableSetTier;
         internal static ConfigEntry<int> SetTier;
+        internal static ConfigEntry<bool> EnableNoBaitConsumption;
         
         // QoL
         internal static ConfigEntry<bool> EnableAutoFish;
@@ -433,6 +434,19 @@ namespace InstantFishing.Config
                 "「true」に設定すると釣り中にスタミナを消費しません。「false」に設定すると通常どおりスタミナを消費します。\n" +
                 "启用或禁用钓鱼时不消耗体力。\n" +
                 "设置为 'true' 时钓鱼不消耗体力，设置为 'false' 时按正常规则消耗体力。"
+            );
+            
+            EnableNoBaitConsumption = config.Bind(
+                section: ModInfo.Name,
+                key: "Enable No Bait Consumption",
+                defaultValue: false,
+                description:
+                "Enable or disable no bait consumption while fishing.\n" +
+                "Set to 'true' to prevent bait from being consumed during fishing, or 'false' to use bait normally.\n" +
+                "釣り中の餌消費なしを有効または無効にします。\n" +
+                "「true」に設定すると釣り中に餌を消費しません。「false」に設定すると通常どおり餌を消費します。\n" +
+                "启用或禁用钓鱼时不消耗鱼饵。\n" +
+                "设置为 'true' 时钓鱼不消耗鱼饵，设置为 'false' 时按正常规则消耗鱼饵。"
             );
         }
         
