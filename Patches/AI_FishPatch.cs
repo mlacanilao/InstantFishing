@@ -258,7 +258,8 @@ namespace InstantFishing.Patches
             if (enableSetTier == true)
             {
                 if (__result?.source._origin == "fish" &&
-                    __result?.id != "fish_slice")
+                    __result?.id != "fish_slice" &&
+                    __result?.tier == 0)
                 {
                     __result?.SetTier(a: tierToSet, setTraits: true);
                 }

@@ -71,13 +71,6 @@ namespace InstantFishing
         }
         
         [HarmonyPrefix]
-        [HarmonyPatch(declaringType: typeof(Card), methodName: nameof(Card.SetTier))]
-        public static bool CardSetTier(Card __instance, int a)
-        {
-            return CardPatch.SetTierPrefix(__instance: __instance);
-        }
-        
-        [HarmonyPrefix]
         [HarmonyPatch(declaringType: typeof(Card), methodName: nameof(Card.ModNum))]
         public static bool CardModNum(Card __instance, int a)
         {
