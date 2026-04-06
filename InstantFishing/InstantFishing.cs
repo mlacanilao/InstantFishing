@@ -1,71 +1,130 @@
 ﻿using System;
-using System.Linq;
+using System.Runtime.CompilerServices;
 using BepInEx;
 using HarmonyLib;
 using InstantFishing.Config;
 
-namespace InstantFishing
+namespace InstantFishing;
+
+internal static class ModInfo
 {
-    internal static class ModInfo
+    internal const string Guid = "omegaplatinum.elin.instantfishing";
+    internal const string Name = "Instant Fishing";
+    internal const string Version = "3.0.0";
+    internal const string ModOptionsGuid = "evilmask.elinplugins.modoptions";
+}
+
+[BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
+internal class InstantFishing : BaseUnityPlugin
+{
+    private static int? lastLoggedInvalidTurboModeSpeedMultiplier;
+
+    internal static InstantFishing? Instance { get; private set; }
+
+    private void Awake()
     {
-        internal const string Guid = "omegaplatinum.elin.instantfishing";
-        internal const string Name = "Instant Fishing";
-        internal const string Version = "2.8.0.0";
-        internal const string ModOptionsGuid = "evilmask.elinplugins.modoptions";
-        internal const string ModOptionsAssemblyName = "ModOptions";
+        Instance = this;
+        InstantFishingConfig.LoadConfig(config: Config);
+        LogInvalidTurboModeSpeedMultiplierIfNeeded();
+        Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
+
+        if (HasModOptionsPlugin() == false)
+        {
+            return;
+        }
+
+        try
+        {
+            UI.UIController.RegisterUI();
+        }
+        catch (Exception ex)
+        {
+            LogError(message: $"An error occurred during UI registration: {ex}");
+        }
     }
 
-    [BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
-    internal class InstantFishing : BaseUnityPlugin
+    internal static void LogDebug(object message, [CallerMemberName] string caller = "")
     {
-        internal static InstantFishing Instance { get; private set; }
+        Instance?.Logger.LogDebug(data: $"[{caller}] {message}");
+    }
 
-        private void Awake()
+    internal static void LogInfo(object message)
+    {
+        Instance?.Logger.LogInfo(data: message);
+    }
+
+    internal static void LogError(object message)
+    {
+        Instance?.Logger.LogError(data: message);
+    }
+
+    internal static int GetEffectiveTurboModeSpeedMultiplier()
+    {
+        int configuredMultiplier = InstantFishingConfig.TurboModeSpeedMultiplier.Value;
+        if (configuredMultiplier > 0)
         {
-            Instance = this;
-            
-            InstantFishingConfig.LoadConfig(config: Config);
-            
-            Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
+            lastLoggedInvalidTurboModeSpeedMultiplier = null;
+            return configuredMultiplier;
         }
 
-        private void Start()
+        LogInvalidTurboModeSpeedMultiplierIfNeeded();
+        return 1;
+    }
+
+    internal static void DisableTurboAndFlushRoundTimers()
+    {
+        if (EClass.core?.IsGameStarted != true)
         {
-            if (IsModOptionsInstalled())
-            {
-                try
-                {
-                    UI.UIController.RegisterUI();
-                }
-                catch (Exception ex)
-                {
-                    Log(payload: $"An error occurred during UI registration: {ex.Message}");
-                }
-            }
-            else
-            {
-                Log(payload: "Mod Options is not installed. Skipping UI registration.");
-            }
+            return;
         }
-        
-        public static void Log(object payload)
+
+        ActionMode.Adv.SetTurbo(mtp: -1);
+        EClass._map?.charas?.ForEach(action: chara => chara.roundTimer = 0f);
+    }
+
+    private static void LogInvalidTurboModeSpeedMultiplierIfNeeded()
+    {
+        int configuredMultiplier = InstantFishingConfig.TurboModeSpeedMultiplier.Value;
+        if (configuredMultiplier > 0)
         {
-            Instance.Logger.LogInfo(data: payload);
+            lastLoggedInvalidTurboModeSpeedMultiplier = null;
+            return;
         }
-        
-        private bool IsModOptionsInstalled()
+
+        if (lastLoggedInvalidTurboModeSpeedMultiplier == configuredMultiplier)
         {
-            try
+            return;
+        }
+
+        lastLoggedInvalidTurboModeSpeedMultiplier = configuredMultiplier;
+        LogInfo(
+            $"Turbo Mode Speed Multiplier is {configuredMultiplier}. " +
+            "Using 1 instead because the multiplier must be greater than 0.");
+    }
+
+    private static bool HasModOptionsPlugin()
+    {
+        try
+        {
+            foreach (var obj in ModManager.ListPluginObject)
             {
-                return AppDomain.CurrentDomain
-                    .GetAssemblies()
-                    .Any(predicate: assembly => assembly.GetName().Name == ModInfo.ModOptionsAssemblyName);
+                if (obj is not BaseUnityPlugin plugin)
+                {
+                    continue;
+                }
+
+                if (plugin.Info.Metadata.GUID == ModInfo.ModOptionsGuid)
+                {
+                    return true;
+                }
             }
-            catch (Exception ex)
-            {
-                Log(payload: $"Error while checking for Mod Options: {ex.Message}");
-                return false;
-            }
+
+            return false;
+        }
+        catch (Exception ex)
+        {
+            LogError(message: $"Error while checking for Mod Options: {ex}");
+            return false;
         }
     }
 }

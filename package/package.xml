@@ -11,7 +11,7 @@
     [h1] Quality of Life Features [/h1]
     [list]
     [*]Automatic fishing.
-    [*]Turbo Mode.
+    [*]Fishing-only Turbo Mode.
     [*]Stamina thresholds.
     [*]Automatic eating.
     [*]Automatic sleeping.
@@ -23,7 +23,7 @@
     [h1] Cheat Features [/h1]
     [list]
     [*]Instantly catch fish.
-    [*]Instantly read ancient books.
+    [*]Instantly read caught ancient books.
     [*]No stamina cost while fishing.
     [*]No bait consumption while fishing.
     [*]Experience multiplier.
@@ -31,8 +31,9 @@
     [*]Apply blessed states (Normal, Cursed, Doomed, or Blessed).
     [*]Set item weights to zero.
     [*]Set tier level (★) for caught fish.
-    [*]Instantly convert fish items into bonito flakes.
-    [*]Instantly convert fish items into wine.
+    [*]Instantly convert selected caught fish into bonito flakes.
+    [*]Instantly convert the current caught fish result into wine.
+    [*]If both bonito flakes and wine are enabled, selected fish can chain from bonito flakes into wine.
     [/list]
 
     [h1] Compatibility [/h1]
@@ -48,7 +49,7 @@
     If needed, users can also edit the configuration file directly:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    Supports Game Version: EA 23.222 Stable
+    [img] https://img.shields.io/badge/Supports%20Game%20Version-EA%2023.287%20Stable-green [/img]
 
     [h1] 快適さの向上 [/h1]
     [list]
@@ -65,15 +66,17 @@
     [h1] チート [/h1]
     [list]
     [*]MODを使用して瞬時に魚を釣り上げる機能。
-    [*]古文書を即座に読む機能。
+    [*]釣れた古書を即座に読む機能。
     [*]釣り中のスタミナ消費なし。
     [*]釣り中の餌消費なし。
-    [*]釣りアイテムの倍率設定。
-    [*]捕まえたアイテムに祝福状態を適用（通常、呪われた、厄運、祝福）。
+    [*]釣り経験値の倍率設定。
+    [*]釣果アイテムの倍率設定。
+    [*]捕まえたアイテムに祝福状態を適用（通常、呪い、厄運、祝福）。
     [*]捕まえたアイテムの重量をゼロに設定。
     [*]釣った魚にティアレベル（★）を設定する機能。
-    [*]魚アイテムを即座にかつお節に変換。
-    [*]魚アイテムを即座にワインに変換。
+    [*]選択した釣果の魚を即座にかつお節に変換。
+    [*]現在の釣果を即座にワインに変換。
+    [*]かつお節化とワイン化の両方を有効にすると、選択した魚はかつお節を経由してワイン化できます。
     [/list]
 
     [h1] 互換性 [/h1]
@@ -89,8 +92,8 @@
     必要に応じて、上級ユーザーは設定ファイルを直接編集することも可能です:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.instantfishing.cfg [/code]
 
-    対応ゲームバージョン: EA 23.222 Stable
+    [img] https://img.shields.io/badge/対応ゲームバージョン-EA%2023.287%20Stable-green [/img]
   </description>
   <tags>QoL, Cheat</tags>
-  <version>0.23.222</version>
+  <version>0.23.287</version>
 </Meta>
