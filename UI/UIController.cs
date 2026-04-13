@@ -40,10 +40,18 @@ public static class UIController
                 {
                     controller.SetPreBuildWithXml(xml: File.ReadAllText(path: InstantFishingConfig.XmlPath));
                 }
+                else
+                {
+                    InstantFishing.LogError(message: $"Mod Options XML not found: {xmlPath}");
+                }
                 
                 if (File.Exists(path: InstantFishingConfig.TranslationXlsxPath))
                 {
                     controller.SetTranslationsFromXslx(path: InstantFishingConfig.TranslationXlsxPath);
+                }
+                else
+                {
+                    InstantFishing.LogError(message: $"Mod Options translations not found: {xlsxPath}");
                 }
                 
                 RegisterEvents(controller: controller);
@@ -81,141 +89,130 @@ public static class UIController
             
             // Cheats
             var enableInstantFishingToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableInstantFishingToggle");
-            if (enableInstantFishingToggle == null)
+            if (enableInstantFishingToggle != null)
             {
-                return;
+                enableInstantFishingToggle.Checked = InstantFishingConfig.EnableInstantFishing.Value;
+                enableInstantFishingToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableInstantFishing.Value = isChecked;
+                };
             }
-            enableInstantFishingToggle.Checked = InstantFishingConfig.EnableInstantFishing.Value;
-            enableInstantFishingToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableInstantFishing.Value = isChecked;
-            };
             
             var enableInstantReadAncientBookToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableInstantReadAncientBookToggle");
-            if (enableInstantReadAncientBookToggle == null)
+            if (enableInstantReadAncientBookToggle != null)
             {
-                return;
+                enableInstantReadAncientBookToggle.Checked = InstantFishingConfig.EnableInstantReadAncientBook.Value;
+                enableInstantReadAncientBookToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableInstantReadAncientBook.Value = isChecked;
+                };
             }
-            enableInstantReadAncientBookToggle.Checked = InstantFishingConfig.EnableInstantReadAncientBook.Value;
-            enableInstantReadAncientBookToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableInstantReadAncientBook.Value = isChecked;
-            };
             
             var enableNoStaminaCostToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableNoStaminaCostToggle");
-            if (enableNoStaminaCostToggle == null)
+            if (enableNoStaminaCostToggle != null)
             {
-                return;
+                enableNoStaminaCostToggle.Checked = InstantFishingConfig.EnableNoStaminaCost.Value;
+                enableNoStaminaCostToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableNoStaminaCost.Value = isChecked;
+                };
             }
-            enableNoStaminaCostToggle.Checked = InstantFishingConfig.EnableNoStaminaCost.Value;
-            enableNoStaminaCostToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableNoStaminaCost.Value = isChecked;
-            };
             
             var enableNoBaitConsumptionToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableNoBaitConsumptionToggle");
-            if (enableNoBaitConsumptionToggle == null)
+            if (enableNoBaitConsumptionToggle != null)
             {
-                return;
+                enableNoBaitConsumptionToggle.Checked = InstantFishingConfig.EnableNoBaitConsumption.Value;
+                enableNoBaitConsumptionToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableNoBaitConsumption.Value = isChecked;
+                };
             }
-            enableNoBaitConsumptionToggle.Checked = InstantFishingConfig.EnableNoBaitConsumption.Value;
-            enableNoBaitConsumptionToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableNoBaitConsumption.Value = isChecked;
-            };
             
             var enableExperienceMultiplierToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableExperienceMultiplierToggle");
-            if (enableExperienceMultiplierToggle == null)
+            if (enableExperienceMultiplierToggle != null)
             {
-                return;
+                enableExperienceMultiplierToggle.Checked = InstantFishingConfig.EnableExperienceMultiplier.Value;
+                enableExperienceMultiplierToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableExperienceMultiplier.Value = isChecked;
+                };
             }
-            enableExperienceMultiplierToggle.Checked = InstantFishingConfig.EnableExperienceMultiplier.Value;
-            enableExperienceMultiplierToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableExperienceMultiplier.Value = isChecked;
-            };
             
             var experienceSlider = GetRequiredPreBuild<OptSlider>(builder: builder, id: "experienceSlider");
-            if (experienceSlider == null)
+            if (experienceSlider != null)
             {
-                return;
+                experienceSlider.Title = InstantFishingConfig.ExperienceMultiplier.Value.ToString();
+                experienceSlider.Value = InstantFishingConfig.ExperienceMultiplier.Value;
+                experienceSlider.Step = 1;
+                experienceSlider.OnValueChanged += value =>
+                {
+                    experienceSlider.Title = value.ToString();
+                    InstantFishingConfig.ExperienceMultiplier.Value = (int)value;
+                };
             }
-            experienceSlider.Title = InstantFishingConfig.ExperienceMultiplier.Value.ToString();
-            experienceSlider.Value = InstantFishingConfig.ExperienceMultiplier.Value;
-            experienceSlider.Step = 1;
-            experienceSlider.OnValueChanged += value =>
-            {
-                experienceSlider.Title = value.ToString();
-                InstantFishingConfig.ExperienceMultiplier.Value = (int)value;
-            };
             
             var experienceSliderDropdown = GetRequiredPreBuild<OptDropdown>(builder: builder, id: "experienceSliderDropdown");
-            if (experienceSliderDropdown == null)
+            if (experienceSliderDropdown != null &&
+                experienceSlider != null)
             {
-                return;
+                experienceSliderDropdown.OnValueChanged += index =>
+                {
+                    experienceSlider.Step = Mathf.Pow(f: 10, p: index);
+                };
             }
-            experienceSliderDropdown.OnValueChanged += index =>
-            {
-                experienceSlider.Step = Mathf.Pow(f: 10, p: index);
-            };
             
             var enableItemMultiplierToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableItemMultiplierToggle");
-            if (enableItemMultiplierToggle == null)
+            if (enableItemMultiplierToggle != null)
             {
-                return;
+                enableItemMultiplierToggle.Checked = InstantFishingConfig.EnableItemMultiplier.Value;
+                enableItemMultiplierToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableItemMultiplier.Value = isChecked;
+                };
             }
-            enableItemMultiplierToggle.Checked = InstantFishingConfig.EnableItemMultiplier.Value;
-            enableItemMultiplierToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableItemMultiplier.Value = isChecked;
-            };
             
             var itemSlider = GetRequiredPreBuild<OptSlider>(builder: builder, id: "itemSlider");
-            if (itemSlider == null)
+            if (itemSlider != null)
             {
-                return;
+                itemSlider.Title = InstantFishingConfig.ItemMultiplier.Value.ToString();
+                itemSlider.Value = InstantFishingConfig.ItemMultiplier.Value;
+                itemSlider.Step = 1;
+                itemSlider.OnValueChanged += value =>
+                {
+                    itemSlider.Title = value.ToString();
+                    InstantFishingConfig.ItemMultiplier.Value = (int)value;
+                };
             }
-            itemSlider.Title = InstantFishingConfig.ItemMultiplier.Value.ToString();
-            itemSlider.Value = InstantFishingConfig.ItemMultiplier.Value;
-            itemSlider.Step = 1;
-            itemSlider.OnValueChanged += value =>
-            {
-                itemSlider.Title = value.ToString();
-                InstantFishingConfig.ItemMultiplier.Value = (int)value;
-            };
             
             var enableSetTierToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableSetTierToggle");
-            if (enableSetTierToggle == null)
+            if (enableSetTierToggle != null)
             {
-                return;
+                enableSetTierToggle.Checked = InstantFishingConfig.EnableSetTier.Value;
+                enableSetTierToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableSetTier.Value = isChecked;
+                };
             }
-            enableSetTierToggle.Checked = InstantFishingConfig.EnableSetTier.Value;
-            enableSetTierToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableSetTier.Value = isChecked;
-            };
             
             var setTierDropdown = GetRequiredPreBuild<OptDropdown>(builder: builder, id: "setTierDropdown");
-            if (setTierDropdown == null)
+            if (setTierDropdown != null)
             {
-                return;
+                setTierDropdown.Value = InstantFishingConfig.SetTier.Value;
+                setTierDropdown.OnValueChanged += index =>
+                {
+                    InstantFishingConfig.SetTier.Value = index;
+                };
             }
-            setTierDropdown.Value = InstantFishingConfig.SetTier.Value;
-            setTierDropdown.OnValueChanged += index =>
-            {
-                InstantFishingConfig.SetTier.Value = index;
-            };
             
             var enableItemBlessedStateToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableItemBlessedStateToggle");
-            if (enableItemBlessedStateToggle == null)
+            if (enableItemBlessedStateToggle != null)
             {
-                return;
+                enableItemBlessedStateToggle.Checked = InstantFishingConfig.EnableItemBlessedState.Value;
+                enableItemBlessedStateToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableItemBlessedState.Value = isChecked;
+                };
             }
-            enableItemBlessedStateToggle.Checked = InstantFishingConfig.EnableItemBlessedState.Value;
-            enableItemBlessedStateToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableItemBlessedState.Value = isChecked;
-            };
             
             var itemBlessedStateDropdownMapping = new Dictionary<int, int>
             {
@@ -228,277 +225,256 @@ public static class UIController
             var reverseDropdownMapping = itemBlessedStateDropdownMapping.ToDictionary(keySelector: kv => kv.Value, elementSelector: kv => kv.Key);
             
             var itemBlessedStateDropdown = GetRequiredPreBuild<OptDropdown>(builder: builder, id: "itemBlessedStateDropdown");
-            if (itemBlessedStateDropdown == null)
+            if (itemBlessedStateDropdown != null)
             {
-                return;
-            }
-            if (reverseDropdownMapping.TryGetValue(key: (int)InstantFishingConfig.ItemBlessedState.Value, value: out int dropdownIndex))
-            {
-                itemBlessedStateDropdown.Value = dropdownIndex;
-            }
-            itemBlessedStateDropdown.OnValueChanged += index =>
-            {
-                if (itemBlessedStateDropdownMapping.TryGetValue(key: index, value: out int mappedValue))
+                if (reverseDropdownMapping.TryGetValue(key: (int)InstantFishingConfig.ItemBlessedState.Value, value: out int dropdownIndex))
                 {
-                    InstantFishingConfig.ItemBlessedState.Value = (BlessedState)mappedValue;
+                    itemBlessedStateDropdown.Value = dropdownIndex;
                 }
-            };
+                itemBlessedStateDropdown.OnValueChanged += index =>
+                {
+                    if (itemBlessedStateDropdownMapping.TryGetValue(key: index, value: out int mappedValue))
+                    {
+                        InstantFishingConfig.ItemBlessedState.Value = (BlessedState)mappedValue;
+                    }
+                };
+            }
             
             var enableZeroWeightToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableZeroWeightToggle");
-            if (enableZeroWeightToggle == null)
+            if (enableZeroWeightToggle != null)
             {
-                return;
+                enableZeroWeightToggle.Checked = InstantFishingConfig.EnableZeroWeight.Value;
+                enableZeroWeightToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableZeroWeight.Value = isChecked;
+                };
             }
-            enableZeroWeightToggle.Checked = InstantFishingConfig.EnableZeroWeight.Value;
-            enableZeroWeightToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableZeroWeight.Value = isChecked;
-            };
             
             // QoL
             var enableAutoFishToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableAutoFishToggle");
-            if (enableAutoFishToggle == null)
+            if (enableAutoFishToggle != null)
             {
-                return;
+                enableAutoFishToggle.Checked = InstantFishingConfig.EnableAutoFish.Value;
+                enableAutoFishToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableAutoFish.Value = isChecked;
+                };
             }
-            enableAutoFishToggle.Checked = InstantFishingConfig.EnableAutoFish.Value;
-            enableAutoFishToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableAutoFish.Value = isChecked;
-            };
             
             var enableTurboModeToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableTurboModeToggle");
-            if (enableTurboModeToggle == null)
+            if (enableTurboModeToggle != null)
             {
-                return;
-            }
-            enableTurboModeToggle.Checked = InstantFishingConfig.EnableTurboMode.Value;
-            enableTurboModeToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableTurboMode.Value = isChecked;
-                
-                if (isChecked == false)
+                enableTurboModeToggle.Checked = InstantFishingConfig.EnableTurboMode.Value;
+                enableTurboModeToggle.OnValueChanged += isChecked =>
                 {
-                    InstantFishing.DisableTurboAndFlushRoundTimers();
-                }
-            };
+                    InstantFishingConfig.EnableTurboMode.Value = isChecked;
+                    
+                    if (isChecked == false)
+                    {
+                        InstantFishing.DisableTurboAndFlushRoundTimers();
+                    }
+                };
+            }
             
             var turboModeSlider = GetRequiredPreBuild<OptSlider>(builder: builder, id: "turboModeSlider");
-            if (turboModeSlider == null)
+            if (turboModeSlider != null)
             {
-                return;
+                turboModeSlider.Title = InstantFishingConfig.TurboModeSpeedMultiplier.Value.ToString();
+                turboModeSlider.Value = InstantFishingConfig.TurboModeSpeedMultiplier.Value;
+                turboModeSlider.Step = 1;
+                turboModeSlider.OnValueChanged += value =>
+                {
+                    turboModeSlider.Title = value.ToString();
+                    InstantFishingConfig.TurboModeSpeedMultiplier.Value = (int)value;
+                };
             }
-            turboModeSlider.Title = InstantFishingConfig.TurboModeSpeedMultiplier.Value.ToString();
-            turboModeSlider.Value = InstantFishingConfig.TurboModeSpeedMultiplier.Value;
-            turboModeSlider.Step = 1;
-            turboModeSlider.OnValueChanged += value =>
-            {
-                turboModeSlider.Title = value.ToString();
-                InstantFishingConfig.TurboModeSpeedMultiplier.Value = (int)value;
-            };
             
             var turboModeDropdown = GetRequiredPreBuild<OptDropdown>(builder: builder, id: "turboModeDropdown");
-            if (turboModeDropdown == null)
+            if (turboModeDropdown != null &&
+                turboModeSlider != null)
             {
-                return;
+                turboModeDropdown.OnValueChanged += index =>
+                {
+                    turboModeSlider.Step = Mathf.Pow(f: 10, p: index);
+                };
             }
-            turboModeDropdown.OnValueChanged += index =>
-            {
-                turboModeSlider.Step = Mathf.Pow(f: 10, p: index);
-            };
             
             var enableStaminaThresholdToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableStaminaThresholdToggle");
-            if (enableStaminaThresholdToggle == null)
+            if (enableStaminaThresholdToggle != null)
             {
-                return;
+                enableStaminaThresholdToggle.Checked = InstantFishingConfig.EnableStaminaThreshold.Value;
+                enableStaminaThresholdToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableStaminaThreshold.Value = isChecked;
+                };
             }
-            enableStaminaThresholdToggle.Checked = InstantFishingConfig.EnableStaminaThreshold.Value;
-            enableStaminaThresholdToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableStaminaThreshold.Value = isChecked;
-            };
             
             var staminaThresholdSlider = GetRequiredPreBuild<OptSlider>(builder: builder, id: "staminaThresholdSlider");
-            if (staminaThresholdSlider == null)
+            if (staminaThresholdSlider != null)
             {
-                return;
+                staminaThresholdSlider.Title = InstantFishingConfig.StaminaThreshold.Value.ToString();
+                staminaThresholdSlider.Value = InstantFishingConfig.StaminaThreshold.Value;
+                staminaThresholdSlider.Step = 1;
+                staminaThresholdSlider.OnValueChanged += value =>
+                {
+                    staminaThresholdSlider.Title = value.ToString();
+                    InstantFishingConfig.StaminaThreshold.Value = (int)value;
+                };
             }
-            staminaThresholdSlider.Title = InstantFishingConfig.StaminaThreshold.Value.ToString();
-            staminaThresholdSlider.Value = InstantFishingConfig.StaminaThreshold.Value;
-            staminaThresholdSlider.Step = 1;
-            staminaThresholdSlider.OnValueChanged += value =>
-            {
-                staminaThresholdSlider.Title = value.ToString();
-                InstantFishingConfig.StaminaThreshold.Value = (int)value;
-            };
             
             var staminaThresholdDropdown = GetRequiredPreBuild<OptDropdown>(builder: builder, id: "staminaThresholdDropdown");
-            if (staminaThresholdDropdown == null)
+            if (staminaThresholdDropdown != null &&
+                staminaThresholdSlider != null)
             {
-                return;
+                staminaThresholdDropdown.OnValueChanged += index =>
+                {
+                    staminaThresholdSlider.Step = Mathf.Pow(f: 10, p: index);
+                };
             }
-            staminaThresholdDropdown.OnValueChanged += index =>
-            {
-                staminaThresholdSlider.Step = Mathf.Pow(f: 10, p: index);
-            };
             
             var enableRippleEffectToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableRippleEffectToggle");
-            if (enableRippleEffectToggle == null)
+            if (enableRippleEffectToggle != null)
             {
-                return;
+                enableRippleEffectToggle.Checked = InstantFishingConfig.EnableRippleEffect.Value;
+                enableRippleEffectToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableRippleEffect.Value = isChecked;
+                };
             }
-            enableRippleEffectToggle.Checked = InstantFishingConfig.EnableRippleEffect.Value;
-            enableRippleEffectToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableRippleEffect.Value = isChecked;
-            };
             
             var enableAnimationsToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableAnimationsToggle");
-            if (enableAnimationsToggle == null)
+            if (enableAnimationsToggle != null)
             {
-                return;
+                enableAnimationsToggle.Checked = InstantFishingConfig.EnableAnimations.Value;
+                enableAnimationsToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableAnimations.Value = isChecked;
+                };
             }
-            enableAnimationsToggle.Checked = InstantFishingConfig.EnableAnimations.Value;
-            enableAnimationsToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableAnimations.Value = isChecked;
-            };
             
             var enableSoundsToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableSoundsToggle");
-            if (enableSoundsToggle == null)
+            if (enableSoundsToggle != null)
             {
-                return;
+                enableSoundsToggle.Checked = InstantFishingConfig.EnableSounds.Value;
+                enableSoundsToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableSounds.Value = isChecked;
+                };
             }
-            enableSoundsToggle.Checked = InstantFishingConfig.EnableSounds.Value;
-            enableSoundsToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableSounds.Value = isChecked;
-            };
             
             var enableWinterFishingToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableWinterFishingToggle");
-            if (enableWinterFishingToggle == null)
+            if (enableWinterFishingToggle != null)
             {
-                return;
+                enableWinterFishingToggle.Checked = InstantFishingConfig.EnableWinterFishing.Value;
+                enableWinterFishingToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableWinterFishing.Value = isChecked;
+                };
             }
-            enableWinterFishingToggle.Checked = InstantFishingConfig.EnableWinterFishing.Value;
-            enableWinterFishingToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableWinterFishing.Value = isChecked;
-            };
             
             var enableAutoEatToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableAutoEatToggle");
-            if (enableAutoEatToggle == null)
+            if (enableAutoEatToggle != null)
             {
-                return;
+                enableAutoEatToggle.Checked = InstantFishingConfig.EnableAutoEat.Value;
+                enableAutoEatToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableAutoEat.Value = isChecked;
+                };
             }
-            enableAutoEatToggle.Checked = InstantFishingConfig.EnableAutoEat.Value;
-            enableAutoEatToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableAutoEat.Value = isChecked;
-            };
             
             var autoEatDropdown = GetRequiredPreBuild<OptDropdown>(builder: builder, id: "autoEatDropdown");
-            if (autoEatDropdown == null)
+            if (autoEatDropdown != null)
             {
-                return;
+                autoEatDropdown.Value = InstantFishingConfig.AutoEatThreshold.Value;
+                autoEatDropdown.OnValueChanged += index =>
+                {
+                    InstantFishingConfig.AutoEatThreshold.Value = index;
+                };
             }
-            autoEatDropdown.Value = InstantFishingConfig.AutoEatThreshold.Value;
-            autoEatDropdown.OnValueChanged += index =>
-            {
-                InstantFishingConfig.AutoEatThreshold.Value = index;
-            };
             
             var enableAutoSleepToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableAutoSleepToggle");
-            if (enableAutoSleepToggle == null)
+            if (enableAutoSleepToggle != null)
             {
-                return;
+                enableAutoSleepToggle.Checked = InstantFishingConfig.EnableAutoSleep.Value;
+                enableAutoSleepToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableAutoSleep.Value = isChecked;
+                };
             }
-            enableAutoSleepToggle.Checked = InstantFishingConfig.EnableAutoSleep.Value;
-            enableAutoSleepToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableAutoSleep.Value = isChecked;
-            };
             
             var autoSleepDropdown = GetRequiredPreBuild<OptDropdown>(builder: builder, id: "autoSleepDropdown");
-            if (autoSleepDropdown == null)
+            if (autoSleepDropdown != null)
             {
-                return;
+                autoSleepDropdown.Value = InstantFishingConfig.AutoSleepThreshold.Value - 1;
+                autoSleepDropdown.OnValueChanged += index =>
+                {
+                    InstantFishingConfig.AutoSleepThreshold.Value = index + 1;
+                };
             }
-            autoSleepDropdown.Value = InstantFishingConfig.AutoSleepThreshold.Value - 1;
-            autoSleepDropdown.OnValueChanged += index =>
-            {
-                InstantFishingConfig.AutoSleepThreshold.Value = index + 1;
-            };
             
             var enableInstantBonitoFlakesToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableInstantBonitoFlakesToggle");
-            if (enableInstantBonitoFlakesToggle == null)
+            if (enableInstantBonitoFlakesToggle != null)
             {
-                return;
+                enableInstantBonitoFlakesToggle.Checked = InstantFishingConfig.EnableInstantBonitoFlakes.Value;
+                enableInstantBonitoFlakesToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableInstantBonitoFlakes.Value = isChecked;
+                };
             }
-            enableInstantBonitoFlakesToggle.Checked = InstantFishingConfig.EnableInstantBonitoFlakes.Value;
-            enableInstantBonitoFlakesToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableInstantBonitoFlakes.Value = isChecked;
-            };
             
             var enableExcludeTierFishFromBonitoToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableExcludeTierFishFromBonitoToggle");
-            if (enableExcludeTierFishFromBonitoToggle == null)
+            if (enableExcludeTierFishFromBonitoToggle != null)
             {
-                return;
+                enableExcludeTierFishFromBonitoToggle.Checked = InstantFishingConfig.EnableExcludeTierFishFromBonito.Value;
+                enableExcludeTierFishFromBonitoToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableExcludeTierFishFromBonito.Value = isChecked;
+                };
             }
-            enableExcludeTierFishFromBonitoToggle.Checked = InstantFishingConfig.EnableExcludeTierFishFromBonito.Value;
-            enableExcludeTierFishFromBonitoToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableExcludeTierFishFromBonito.Value = isChecked;
-            };
             
             var enableInstantWineToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableInstantWineToggle");
-            if (enableInstantWineToggle == null)
+            if (enableInstantWineToggle != null)
             {
-                return;
+                enableInstantWineToggle.Checked = InstantFishingConfig.EnableInstantWine.Value;
+                enableInstantWineToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableInstantWine.Value = isChecked;
+                };
             }
-            enableInstantWineToggle.Checked = InstantFishingConfig.EnableInstantWine.Value;
-            enableInstantWineToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableInstantWine.Value = isChecked;
-            };
             
             var enableAutoDumpToggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: "enableAutoDumpToggle");
-            if (enableAutoDumpToggle == null)
+            if (enableAutoDumpToggle != null)
             {
-                return;
+                enableAutoDumpToggle.Checked = InstantFishingConfig.EnableAutoDump.Value;
+                enableAutoDumpToggle.OnValueChanged += isChecked =>
+                {
+                    InstantFishingConfig.EnableAutoDump.Value = isChecked;
+                };
             }
-            enableAutoDumpToggle.Checked = InstantFishingConfig.EnableAutoDump.Value;
-            enableAutoDumpToggle.OnValueChanged += isChecked =>
-            {
-                InstantFishingConfig.EnableAutoDump.Value = isChecked;
-            };
 
             var autoDumpTriggerDropdown = GetRequiredPreBuild<OptDropdown>(builder: builder, id: "autoDumpTriggerDropdown");
-            if (autoDumpTriggerDropdown == null)
+            if (autoDumpTriggerDropdown != null)
             {
-                return;
+                autoDumpTriggerDropdown.Value = (int)InstantFishingConfig.AutoDumpTrigger.Value;
+                autoDumpTriggerDropdown.OnValueChanged += index =>
+                {
+                    InstantFishingConfig.AutoDumpTrigger.Value = (AutoDumpTriggerMode)index;
+                };
             }
-            autoDumpTriggerDropdown.Value = (int)InstantFishingConfig.AutoDumpTrigger.Value;
-            autoDumpTriggerDropdown.OnValueChanged += index =>
-            {
-                InstantFishingConfig.AutoDumpTrigger.Value = (AutoDumpTriggerMode)index;
-            };
 
             var autoDumpThresholdSlider = GetRequiredPreBuild<OptSlider>(builder: builder, id: "autoDumpThresholdSlider");
-            if (autoDumpThresholdSlider == null)
+            if (autoDumpThresholdSlider != null)
             {
-                return;
+                autoDumpThresholdSlider.Title = GetAutoDumpThresholdTitle(controller: controller, value: InstantFishingConfig.AutoDumpThreshold.Value);
+                autoDumpThresholdSlider.Value = InstantFishingConfig.AutoDumpThreshold.Value;
+                autoDumpThresholdSlider.Step = 1;
+                autoDumpThresholdSlider.OnValueChanged += value =>
+                {
+                    int thresholdValue = (int)value;
+                    autoDumpThresholdSlider.Title = GetAutoDumpThresholdTitle(controller: controller, value: thresholdValue);
+                    InstantFishingConfig.AutoDumpThreshold.Value = thresholdValue;
+                };
             }
-            autoDumpThresholdSlider.Title = GetAutoDumpThresholdTitle(controller: controller, value: InstantFishingConfig.AutoDumpThreshold.Value);
-            autoDumpThresholdSlider.Value = InstantFishingConfig.AutoDumpThreshold.Value;
-            autoDumpThresholdSlider.Step = 1;
-            autoDumpThresholdSlider.OnValueChanged += value =>
-            {
-                int thresholdValue = (int)value;
-                autoDumpThresholdSlider.Title = GetAutoDumpThresholdTitle(controller: controller, value: thresholdValue);
-                InstantFishingConfig.AutoDumpThreshold.Value = thresholdValue;
-            };
 
             BuildFishToggleGrid(builder: builder);
         };

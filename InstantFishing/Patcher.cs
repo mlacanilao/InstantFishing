@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace InstantFishing;
 
-[HarmonyPatch]
 public class Patcher
 {
     [HarmonyPostfix]
